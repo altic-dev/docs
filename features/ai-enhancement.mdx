@@ -1,0 +1,110 @@
+---
+title: "AI Enhancement: Cloud and Local Post-Processing"
+sidebarTitle: "AI Enhancement"
+description: "Polish raw transcriptions with a language model of your choice — Fluid Intelligence, OpenAI, Groq, or any OpenAI-compatible endpoint."
+---
+
+AI Enhancement is an optional layer that sits between FluidVoice's speech model and your active app. After the speech model transcribes your voice, the enhancement provider receives the raw transcript, applies a system prompt to clean and reformat it, and returns the polished result — which FluidVoice then types into whatever app is in focus. You can use FluidVoice without any AI Enhancement configured, but enabling it transforms rough dictation into polished prose automatically.
+
+## Available Providers
+
+<CardGroup cols={2}>
+  <Card title="Fluid Intelligence" icon="microchip">
+    **On-device · No API key · ~3.5 GB download**
+
+    Runs the Fluid-1 model locally on your Mac. No data leaves your device. Requires Apple Silicon.
+  </Card>
+  <Card title="OpenAI" icon="robot">
+    **Cloud · API key required**
+
+    Uses OpenAI's models (GPT-4o, GPT-4.1, and others) for high-quality enhancement. Transcripts are sent to OpenAI's servers.
+  </Card>
+  <Card title="Groq" icon="bolt">
+    **Cloud · API key required**
+
+    Fast inference via Groq's LPU hardware. Good balance of speed and quality for real-time dictation enhancement.
+  </Card>
+  <Card title="Custom Provider" icon="server">
+    **Any OpenAI-compatible endpoint**
+
+    Point FluidVoice at any server that speaks the OpenAI chat completions API — Ollama, LM Studio, self-hosted models, or enterprise endpoints.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Use **Fluid Intelligence** if you want fully private AI enhancement with no API key, no cost, and no data leaving your Mac. All processing happens on-device, including when you're offline.
+</Tip>
+
+## How to Add a Provider
+
+<Steps>
+  <Step title="Open AI Enhancement settings">
+    Go to **Settings → AI Enhancement**.
+  </Step>
+  <Step title="Select your provider">
+    Choose **OpenAI**, **Groq**, or **Custom** from the provider list. If you want Fluid Intelligence, select it and follow the model download prompt instead.
+  </Step>
+  <Step title="Paste your API key">
+    Enter your API key in the key field. FluidVoice stores it securely in the **macOS Keychain** — it is never written to disk in plaintext or included in any log. When macOS asks about keychain access, select **Always allow**.
+  </Step>
+  <Step title="Select a model">
+    Pick a model from the list. FluidVoice fetches available models for the provider automatically once the key is verified.
+  </Step>
+  <Step title="Test your setup">
+    Dictate a short sentence. The live preview overlay shows the raw transcript; the final text typed into the app reflects the AI-polished version.
+  </Step>
+</Steps>
+
+## Setting Up a Custom Provider
+
+Custom providers let you connect FluidVoice to any OpenAI-compatible endpoint, including local model servers.
+
+<Steps>
+  <Step title="Add a custom provider">
+    In **Settings → AI Enhancement**, select **Custom** and click **Add Provider**.
+  </Step>
+  <Step title="Enter the base URL">
+    Provide the base URL of your endpoint. Examples:
+
+    | Service | Base URL |
+    |---|---|
+    | Ollama (local) | `http://localhost:11434/v1` |
+    | LM Studio (local) | `http://localhost:1234/v1` |
+    | Self-hosted vLLM | `http://your-server:8000/v1` |
+    | Enterprise proxy | `https://your-org.openai.azure.com/openai` |
+  </Step>
+  <Step title="Enter the model name">
+    Type the model identifier exactly as your server expects it, for example `llama3.2`, `mistral`, or `deepseek-r1`.
+  </Step>
+  <Step title="Add an API key (if required)">
+    Local servers like Ollama typically don't require a key. Remote endpoints usually do. Leave the field empty if your server accepts unauthenticated requests.
+  </Step>
+</Steps>
+
+## Per-Mode Enhancement
+
+FluidVoice applies AI Enhancement separately for **Dictate mode** and **Edit mode**. This means you can, for example, use Fluid Intelligence for standard dictation while using OpenAI for text rewrites — or disable enhancement entirely for one mode while keeping it active for the other.
+
+Configure each mode's provider and model independently in **Settings → AI Enhancement**.
+
+## When Enhancement Runs
+
+AI Enhancement runs **after** the speech model finishes transcribing and **before** the text is typed into the active app. The sequence is:
+
+1. You speak and release the hotkey.
+2. The speech model transcribes your audio to a raw text string.
+3. FluidVoice sends the raw transcript to your configured enhancement provider with the active system prompt.
+4. The provider returns a cleaned, formatted version.
+5. FluidVoice types the final result into the active app.
+
+The live preview overlay shows the raw transcript as you speak, then updates to the final polished text once enhancement completes.
+
+## Disabling AI Enhancement
+
+To turn off AI Enhancement entirely, go to **Settings → AI Enhancement** and set the provider to **Off**. FluidVoice falls back to Direct Dictation: the raw transcript is typed into the active app without any post-processing.
+
+You can also disable enhancement for a specific mode (Dictate or Edit) while keeping it active for the other, using the per-mode controls in the same settings panel.
+
+<Note>
+  API keys are stored in the macOS Keychain and are never transmitted except to the provider's own endpoint. FluidVoice does not collect or log your API keys, transcripts, or AI responses.
+</Note>

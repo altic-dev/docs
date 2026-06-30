@@ -1,0 +1,495 @@
+# Source: https://altic.dev/fluid
+
+New · Fluid-1 model now available
+
+# Fluid-1 gives it intelligence.FluidVoice gives you the app.
+
+FluidVoice is a free, open-source Mac dictation app with Fluid-1, the best local AI model for polishing dictation.
+
+$`brew install --cask fluidvoice`
+
+Download for Mac[Watch demo](https://altic.dev/#demo)
+
+Star
+
+—
+
+On-device AIZero data leaves your MacSmart formatting
+
+50,000+ downloads · macOS 15.0+ · Apple Silicon & Intel
+
+Scroll to see more
+
+### Watch FluidVoice and Fluid Intelligence work
+
+SpeedAccuracy
+
+![Speed demo preview](https://altic.dev/_next/image?url=%2Ffluid%2Fcmd_mode_ss.png&w=3840&q=75)
+
+Raw FluidVoice dictation — speech hits the terminal as fast as you can talk.
+
+Try it yourself
+
+### Take FluidVoice for a spin
+
+Press ⌥ to dictate into Claude Code.
+
+![macOS Sonoma Wallpaper](https://altic.dev/_next/image?url=%2Fwallpapers%2Fmac-sonoma.jpg&w=3840&q=75)
+
+Claude CodeFileEditView
+
+Fri 9:41 AM
+
+Claude Code v2.1.12
+
+▐▛███▜▌ ▝▜█████▛▘ ▘▘ ▝▝
+
+Welcome back!
+
+Opus 4.5 · Claude Team · FluidVoice
+
+~/dev/contact-form
+
+❯ ▍
+
+Read(ContactForm.tsx)
+
+Read 156 lines
+
+I'll fix both issues — email validation and
+
+a loading spinner on submit.
+
+Update(ContactForm.tsx)
+
+──────────────────────────────────────────────────────────────────────
+
+Edit file ContactForm.tsx
+
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+22 const handleSubmit = async (e) => {
+
+23 e.preventDefault();
+
+24 + if (!validateEmail(email)) {
+
++ setError('Please enter a valid email');
+
++ return;
+
++ }
+
+25 }
+
+Bash(npm test)
+
+4 passed
+
+⌥Press ⌥ to dictate
+
+Tap the button, or press the Option key on your keyboard
+
+App + model
+
+## Two layers, one local workflow
+
+Most open-source dictation apps stop at transcription. Most polished dictation apps send text to the cloud. FluidVoice pairs an open-source Mac app with Fluid-1, a local model for post-processing.
+
+### FluidVoice
+
+The open-source macOS app: hotkey, overlay, local speech models, typing into any app, command mode, write mode, history, settings, and community-visible code.
+
+### Fluid-1
+
+The local intelligence layer: cleans up rough dictation, adapts tone per app, formats structure, fixes casing, handles dates/names/numbers, and keeps data on-device.
+
+Loved by the community
+
+## From developers to multilingual teams
+
+50,000+
+
+Downloads
+
+Fluid-1
+
+On-device AI model
+
+Free
+
+Forever, no tiers
+
+GPLv3
+
+Open source
+
+40+
+
+Languages
+
+What's inside
+
+## Powerful features, seamlessly integrated
+
+### Works offline
+
+Local speech models process everything on-device. No Wi-Fi, no problem.
+
+### Fluid Intelligence
+
+On-device AI polishes formatting, capitalization, and post-processing. Zero data leaves your Mac.
+
+### Predefined modes
+
+Write Mode, Command Mode, and Direct Dictation - switch context instantly.
+
+### Multilanguage support
+
+40+ languages across models. From Nemotron to Whisper, speak naturally in your language.
+
+### System-wide input
+
+One shortcut, any text field. Email, docs, chat, terminal, and code editors all work the same.
+
+### Real-time speed
+
+Speaking is ~3.7x faster than typing. Text lands instantly so ideas stay in motion.
+
+### Apple Silicon optimized
+
+CoreML and Metal deliver low-latency transcription while preserving battery efficiency.
+
+### AI post-processing
+
+Local or cloud — Fluid Intelligence, OpenAI, Groq, or custom providers. You choose.
+
+Adaptive tone
+
+## Different apps, different tone
+
+Customize prompts for each app so your dictation fits the context.
+
+You said
+
+“hey so um the deploy broke because of the config change from yesterday, I fixed it but we should probably review those before pushing to prod going forward”
+
+#engineering
+
+R
+
+Rohit 9:42 AM
+
+hey team — deploy broke from yesterday's config change. fixed it now, but we should probably start reviewing configs before pushing to prod 🙏
+
+Tone: Casual
+
+New Message
+
+To: team@company.com
+
+Subject: Deployment Issue Resolved
+
+Hi team, the deployment failed due to a configuration change made yesterday. I have resolved the issue. Going forward, I recommend we review configuration changes before deploying to production.
+
+Tone: Formal
+
+Issue #142
+
+Deployment failed — config change
+
+\## Issue
+
+Deployment failed due to config change (ref: yesterday's PR).
+
+\## Resolution
+
+\- Fixed and verified in staging
+
+\- Prod deploy restored
+
+\## Action item
+
+Require config review before prod push.
+
+Tone: Structured
+
+Quick Notes
+
+deploy broke from yesterday's config change. fixed it. need to set up config review before prod pushes going forward.
+
+Tone: Personal
+
+### Customize per app
+
+Write custom prompts for any app. Slack casual, Mail formal, GitHub structured — you define it.
+
+### Detects the app
+
+FluidVoice recognizes which app is focused and selects the matching tone profile automatically.
+
+### Same voice, right tone
+
+Speak naturally. Fluid-1 rewrites your words to fit the context without changing your meaning.
+
+Integrations
+
+## Works anywhere you can type
+
+Cursor, Slack, Notion, Chrome, Discord, Ghostty… You say it, FluidVoice handles it.
+
+Cursor
+
+Slack
+
+Notion
+
+Chrome
+
+Discord
+
+Ghostty
+
+Terminal
+
+Mail
+
+Messages
+
+VS Code
+
+Xcode
+
+Notes
+
+Performance
+
+## Built for speed you can feel
+
+FluidVoice keeps inference local and latency low so your writing flow stays uninterrupted.
+
+Up to 3,380x
+
+Real-time factor
+
+Peak throughput varies by hardware, model, and audio length.
+
+<100ms
+
+Perceived latency
+
+Fast enough to feel immediate while moving through thought-heavy tasks.
+
+Local
+
+Local-first dictation
+
+Local speech models keep dictation on-device; optional AI providers are user-controlled.
+
+Multi-hour
+
+Long-form windows
+
+Handles extended transcription sessions without manual chunking.
+
+Architecture highlights
+
+Model lineup spans Nemotron Speech 3.5, Parakeet Flash, Parakeet TDT v3/v2, Cohere Transcribe, Apple Speech, and Whisper, with optimized routing to keep transcription responsive across short bursts and long dictation sessions.
+
+Nemotron Speech 3.5 — Ultra Fast Low LatencyNemotron 3.5 MultilingualParakeet Flash (Beta)Parakeet TDT v3Parakeet TDT v2Cohere TranscribeApple SpeechWhisper Tiny / Base / Small / Medium / Large
+
+What the community says
+
+## Loved by developers, built for how you work
+
+Free forever
+
+“Thank you for making it free, forever! Hope to see it support more languages soon!”
+
+GitHub discussion
+
+Community-first growth
+
+“Very nice! I imagine monetization in future might be easier cause you're being distributed for free. Smart plan.”
+
+Early adopter
+
+Open source trust
+
+“Thanks for making it open source”
+
+Developer comment
+
+Multilingual reliability
+
+“It works fine in German by the way (Tahoe, Mac Mini M2 Pro, external mic). This opens a host of new possibilities for interacting with my Mac.”
+
+German workflow
+
+Intent recovery
+
+“Wow, impressive. I stumbled while dictating and the transcriber caught it and output the word I had intended to say!”
+
+Daily dictation
+
+Head-to-head speed
+
+“This is a really impressive app, speedy and accurate. It's just as good as Wispr Flow in my testing.”
+
+Comparison test
+
+Product polish
+
+“This is unbelievably slick. Congrats, and well done.”
+
+Launch feedback
+
+Open source goodwill
+
+“Solid product! and super cool of you to make it open source :)”
+
+Community comment
+
+Language + media
+
+“I just did a quick test in French using dictation and also tried transcribing a video — both worked very well.”
+
+French test
+
+Developer adoption
+
+“Love the project. Thanks for building this!”
+
+GitHub reaction
+
+Retention
+
+“Having been one of the early users, I want to say thank you and amazing job!”
+
+Early user
+
+Momentum
+
+“All the best of success with this. Congrats :)”
+
+Community support
+
+Free forever
+
+“Thank you for making it free, forever! Hope to see it support more languages soon!”
+
+GitHub discussion
+
+Community-first growth
+
+“Very nice! I imagine monetization in future might be easier cause you're being distributed for free. Smart plan.”
+
+Early adopter
+
+Open source trust
+
+“Thanks for making it open source”
+
+Developer comment
+
+Multilingual reliability
+
+“It works fine in German by the way (Tahoe, Mac Mini M2 Pro, external mic). This opens a host of new possibilities for interacting with my Mac.”
+
+German workflow
+
+Intent recovery
+
+“Wow, impressive. I stumbled while dictating and the transcriber caught it and output the word I had intended to say!”
+
+Daily dictation
+
+Head-to-head speed
+
+“This is a really impressive app, speedy and accurate. It's just as good as Wispr Flow in my testing.”
+
+Comparison test
+
+Product polish
+
+“This is unbelievably slick. Congrats, and well done.”
+
+Launch feedback
+
+Open source goodwill
+
+“Solid product! and super cool of you to make it open source :)”
+
+Community comment
+
+Language + media
+
+“I just did a quick test in French using dictation and also tried transcribing a video — both worked very well.”
+
+French test
+
+Developer adoption
+
+“Love the project. Thanks for building this!”
+
+GitHub reaction
+
+Retention
+
+“Having been one of the early users, I want to say thank you and amazing job!”
+
+Early user
+
+Momentum
+
+“All the best of success with this. Congrats :)”
+
+Community support
+
+FAQ
+
+## Frequently asked questions
+
+### Is FluidVoice free?
+
+Yes. FluidVoice is completely free and open source.
+
+### What macOS version does FluidVoice require?
+
+FluidVoice requires macOS 15.0 Sequoia or later, plus microphone access and accessibility permissions for typing.
+
+### Does FluidVoice support Intel Macs?
+
+Yes. Current version supports Intel Macs by using Whisper models.
+
+### Which speech models does FluidVoice support?
+
+FluidVoice supports Nemotron Speech 3.5 (Ultra Fast Low Latency and Multilingual), Parakeet Flash (Beta), Parakeet TDT v3, Parakeet TDT v2, Cohere Transcribe, Apple Speech, and Whisper Tiny/Base/Small/Medium/Large.
+
+### What is Fluid Intelligence and the Fluid-1 model?
+
+Fluid Intelligence is a local AI runtime which runs the Fluid-1 model. It delivers advanced on-device dictation enhancement — smart formatting, context-aware capitalization, adaptive tone based on the active app, and post-processing — all running locally on your Mac. It is fully optional (~3.5 GB download), requires no cloud or API keys, and no data leaves your machine. FluidVoice works great on its own without it.
+
+### How many languages does FluidVoice support?
+
+Language support is model-specific: Nemotron Speech 3.5 supports ~40 languages, Parakeet Flash and Parakeet TDT v2 are English-only, Parakeet TDT v3 supports 25 languages, Cohere Transcribe supports 14 languages, Apple Speech depends on macOS system languages, and Whisper supports up to 99 languages depending on model size.
+
+### Does FluidVoice work offline?
+
+FluidVoice is local-first and uses local speech models for dictation. AI enhancement can use optional providers such as OpenAI, Groq, or custom providers, so cloud use depends on the features and providers a user enables.
+
+### What permissions does FluidVoice need?
+
+FluidVoice needs microphone access for voice capture and accessibility permissions for typing into other apps.
+
+### What license does FluidVoice use?
+
+From 2026-02-23 onward, FluidVoice is licensed under the GNU General Public License v3.0 (GPLv3). Versions before that date used Apache License 2.0.
+
+### What does FluidVoice analytics collect?
+
+Optional anonymous analytics, FluidVoice does not collect voice, raw audio, transcribed text, prompts etc. No sensitive info leaves your mac
+
+### Where can I download FluidVoice?
+
+You can click the download button or get the latest release at https://github.com/altic-dev/Fluid-oss/releases/latest.

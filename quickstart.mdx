@@ -1,47 +1,103 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with FluidVoice in 5 Steps"
+sidebarTitle: "Quickstart"
+description: "Go from zero to dictating in minutes — install FluidVoice, grant permissions, pick a speech model, and start speaking into any app on your Mac."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+This guide walks you through everything you need to do to start dictating with FluidVoice. The first four steps are required; the remaining steps are optional enhancements you can add whenever you're ready. Most users are up and running in under five minutes.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Install FluidVoice">
+    Install FluidVoice using Homebrew (recommended) or by downloading the latest release from GitHub.
 
-    ```bash
-    npm install your-package
+    <CodeGroup>
+    ```bash Homebrew
+    brew install --cask fluidvoice
     ```
+
+    ```bash Manual download
+    # Download the latest .dmg from GitHub Releases
+    open https://github.com/altic-dev/FluidVoice/releases/latest
+    ```
+    </CodeGroup>
+
+    After installation, open FluidVoice from your Applications folder. The onboarding wizard starts automatically on first launch.
+
+    <Note>
+      FluidVoice requires macOS 15.0 Sequoia or later and an Apple Silicon Mac for most models. Intel Macs are supported via Whisper models (version 1.5.1+).
+    </Note>
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
 
-    ```bash
-    your-cli init
-    ```
+  <Step title="Grant permissions">
+    FluidVoice needs two permissions to work. macOS will prompt you for both during onboarding.
+
+    **Microphone access** — allows FluidVoice to capture your voice. Without it, dictation cannot start. Click **Allow** when macOS shows the microphone prompt.
+
+    **Accessibility access** — allows FluidVoice to type transcribed text directly into any app using the macOS Accessibility API. Without it, FluidVoice can transcribe but cannot insert text. To enable it, go to **System Settings → Privacy & Security → Accessibility** and toggle FluidVoice on.
+
+    <Warning>
+      If you deny the accessibility permission, dictation will work but text will not be inserted into other apps. You can re-enable it at any time in System Settings.
+    </Warning>
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
 
-    ```bash
-    your-cli start
-    ```
+  <Step title="Set your global hotkey">
+    A global hotkey lets you trigger dictation from any app without switching to FluidVoice. Open **Settings** and choose a hotkey combination that doesn't conflict with your existing shortcuts.
+
+    A common choice is **⌥ Option** (held) or a double-tap of a function key, but you can assign any key combination you prefer. The hotkey is active system-wide the moment you save it.
+  </Step>
+
+  <Step title="Choose a speech model">
+    During onboarding, FluidVoice asks you to select a speech model. Each model offers a different balance of language support, latency, and download size.
+
+    | Model | Best for | Languages | Size |
+    |---|---|---|---|
+    | Nemotron Speech 3.5 Ultra | Streaming multilingual | ~40 | ~670 MB |
+    | Nemotron 3.5 Multilingual | Higher-accuracy multilingual | ~40 | ~530 MB |
+    | Parakeet Flash (Beta) | Lowest-latency English | English | ~250 MB |
+    | Parakeet TDT v3 | Fast multilingual default | 25 | ~500 MB |
+    | Parakeet TDT v2 | Fast English-only | English | ~500 MB |
+    | Cohere Transcribe | High-accuracy multilingual | 14 | ~1.4 GB |
+    | Apple Speech | Zero-download, built-in | System languages | Built-in |
+    | Whisper (Tiny–Large) | Broad compatibility, Intel | Up to 99 | ~75 MB–2.9 GB |
+
+    If you're unsure, start with **Apple Speech** (no download required) or **Parakeet TDT v3** for a fast multilingual experience on Apple Silicon. You can switch models at any time in Settings.
+
+    <Tip>
+      If you're on an Intel Mac, select a **Whisper** model. It's the only family that supports Intel hardware.
+    </Tip>
+  </Step>
+
+  <Step title="(Optional) Enable Fluid Intelligence">
+    Fluid Intelligence is a local AI layer that polishes your dictation after transcription — smart formatting, context-aware capitalization, adaptive tone per app, and handling of dates, names, and numbers. Everything runs on your Mac; no data leaves your machine.
+
+    To enable it, click **Enable Fluid Intelligence** during onboarding, or go to **Settings → Fluid Intelligence** after setup. The Fluid-1 model download is approximately **3.5 GB**.
+
+    <Info>
+      Fluid Intelligence is completely optional. FluidVoice is fully functional without it. Enable it when you want on-device AI polish without any cloud dependency.
+    </Info>
+  </Step>
+
+  <Step title="(Optional) Add a cloud AI provider">
+    If you prefer cloud-based post-processing, you can connect an AI provider for text enhancement. FluidVoice supports **OpenAI**, **Groq**, and **custom providers** (any OpenAI-compatible API endpoint).
+
+    Go to **Settings → AI Enhancement** and enter your API key. Keys are stored securely in the macOS Keychain — not in the app, not in any log file. When macOS prompts for Keychain access, select **Always Allow** so FluidVoice can retrieve the key without interrupting your dictation flow.
+
+    <Note>
+      Cloud AI enhancement is opt-in. No text is sent to any external service unless you add a provider and enable enhancement.
+    </Note>
+  </Step>
+
+  <Step title="Start dictating">
+    Press your hotkey, speak naturally, and release. FluidVoice captures your voice, runs it through the speech model, and inserts the transcribed text directly into the focused text field — no copy-paste, no switching apps.
+
+    - Use **Direct Dictation** for fast, inline text entry anywhere on your Mac.
+    - Switch to **Write Mode** to dictate into a dedicated overlay, or to select and rewrite existing text.
+    - Switch to **Command Mode** to control your Mac by voice — launch apps, trigger shortcuts, and run automations.
+
+    The live overlay shows your words in real time as you speak, so you always know what's being captured.
   </Step>
 </Steps>
 
 <Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
-
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
+  To get early access to new features before they ship in stable releases, go to **Settings → Automatic Updates → Beta Releases** and enable the beta channel. Beta builds are opt-in and you can switch back to stable at any time.
 </Tip>

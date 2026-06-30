@@ -1,0 +1,53 @@
+---
+title: "GET /v1/health — Check FluidVoice Status"
+sidebarTitle: "GET /v1/health"
+description: "Ping the Local API to confirm FluidVoice is running and retrieve the current app version string before making calls to other endpoints."
+---
+
+The health endpoint gives you a fast, lightweight way to confirm that FluidVoice is running and that the Local API is reachable. It returns the current app version, which you can use to guard against calling endpoints that may not exist in older releases.
+
+## Request
+
+```
+GET /v1/health
+```
+
+No request body, query parameters, or headers are required.
+
+## Response
+
+<ResponseField name="status" type="string" required>
+  Always `"ok"` when the server is healthy and responding normally.
+</ResponseField>
+
+<ResponseField name="version" type="string" required>
+  The currently running FluidVoice app version string, for example `"1.6.0"`. Returns `"unknown"` if the version cannot be read from the app bundle.
+</ResponseField>
+
+## Example
+
+**Request**
+
+```bash
+curl http://localhost:47733/v1/health
+```
+
+**Response**
+
+```json
+{
+  "status": "ok",
+  "version": "1.6.0"
+}
+```
+
+## Error responses
+
+| Status | Meaning |
+|--------|---------|
+| `404` | The path does not exist — check that you are using `/v1/health` exactly. |
+| `405` | You sent a non-GET method (e.g. POST) to this endpoint. |
+
+<Tip>
+  Call `/v1/health` at the start of any script that depends on the Local API. If the request fails to connect, FluidVoice is not running or the Local API is disabled. Direct users to **Settings → Advanced → Local API** to enable it.
+</Tip>

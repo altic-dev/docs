@@ -1,0 +1,103 @@
+---
+title: "Transcription History and Usage Stats"
+sidebarTitle: "History & Stats"
+description: "Review past dictations with original and AI-polished text side by side, track daily usage, and optionally save audio recordings locally."
+---
+
+FluidVoice keeps a local record of every dictation session so you can review what was transcribed, compare the raw speech-to-text output with the AI-polished final text, and see which app was active at the time. Daily usage statistics appear in the menu bar and on the stats header card, giving you a quick sense of how much you're dictating. Everything stays on your Mac — history is never uploaded or synced to any external service.
+
+<Note>
+  Audio history is **opt-in and disabled by default**. FluidVoice only saves audio recordings if you explicitly enable the setting. Transcription text history is saved by default and can be disabled separately.
+</Note>
+
+## Transcription History
+
+Every dictation session produces a history entry containing:
+
+| Field | Description |
+|---|---|
+| **Timestamp** | Date and time the dictation occurred |
+| **App name** | The app that was in focus when you dictated |
+| **Raw text** | The original transcript from the speech model, before any AI processing |
+| **Final text** | The post-processed result that was typed into the app |
+| **AI processed** | Whether an AI enhancement provider was applied |
+
+Having both the raw and final text in the same entry makes it easy to see what the speech model heard versus what the AI changed, which is useful for tuning your prompts and spotting persistent transcription errors.
+
+### How to Access History
+
+Open history from either of these locations:
+
+- **Menu bar icon → History**
+- **Settings → History**
+
+The history view shows your recent dictations in reverse chronological order. Select any entry to expand it and see the full raw and final text side by side.
+
+### Clearing History
+
+To remove all history entries, go to **Settings → History** and click **Clear All**. Individual entries can also be deleted from the history view.
+
+### API Access for Developers
+
+The local REST API exposes history for external tools and scripts:
+
+```bash
+# Get the last 20 history entries (default limit)
+curl http://localhost:11111/v1/history
+
+# Get the last 50 entries
+curl http://localhost:11111/v1/history?limit=50
+```
+
+Each response item includes `id`, `timestamp`, `originalText`, `finalText`, `appName`, `characterCount`, and `wasAIProcessed`.
+
+---
+
+## Audio History
+
+When audio history is enabled, FluidVoice saves a local audio recording of each dictation session alongside the transcript entry. This lets you play back exactly what you said, which is useful for debugging transcription accuracy or reviewing dictation sessions later.
+
+### Enabling Audio History
+
+<Steps>
+  <Step title="Open History settings">
+    Go to **Settings → History**.
+  </Step>
+  <Step title="Enable audio recording">
+    Toggle **Save audio with transcription history** to on.
+  </Step>
+  <Step title="Set a storage budget">
+    Use the **Audio history budget** slider to set the maximum disk space for audio recordings (in gigabytes). When the budget is reached, older recordings are deleted automatically to make room for new ones.
+  </Step>
+</Steps>
+
+### Exporting Audio
+
+To export all saved audio recordings as a single ZIP file:
+
+1. Go to **Settings → History**.
+2. Click **Export Audio as ZIP**.
+3. Choose a save location. FluidVoice packages all recordings and downloads the archive.
+
+This is useful for backing up recordings, sharing sessions for debugging, or processing audio with external tools.
+
+<Warning>
+  Audio recordings are stored locally in your Application Support folder and never leave your device. They are not included in iCloud backups unless your Application Support directory is explicitly synced. Keep this in mind when setting your storage budget on Macs with limited disk space.
+</Warning>
+
+---
+
+## Today-Usage Stats
+
+FluidVoice tracks your daily dictation activity and surfaces it in two places:
+
+- **Menu bar toolbar pill** — a compact counter showing today's word count or character count at a glance without opening the app
+- **Stats header card** — a more detailed summary visible at the top of the main FluidVoice window
+
+Usage statistics reset at midnight local time. They are stored locally and are not shared with any external service.
+
+---
+
+## Privacy
+
+All history — transcription text and audio recordings — is stored exclusively on your Mac. FluidVoice does not sync history to iCloud, does not upload it to any server, and does not include it in anonymous analytics. If you add an AI enhancement provider, the raw transcript is sent to that provider during processing, but the history record itself is always stored locally regardless of which provider you use.

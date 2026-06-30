@@ -1,0 +1,149 @@
+---
+title: "FluidVoice Dictation Modes Explained"
+sidebarTitle: "Dictation Modes"
+description: "Learn how Direct Dictation, Write Mode, and Command Mode work — and when to reach for each one for faster, smarter voice input on your Mac."
+---
+
+FluidVoice gives you three distinct ways to put your voice to work. Direct Dictation gets raw speech on screen as fast as possible. Write Mode sends your dictation through an AI layer that cleans up formatting and grammar before typing it into the active app — and can also rewrite text you've already selected. Command Mode turns your voice into a macOS automation agent: speak an instruction, and FluidVoice executes it. Switch between modes in an instant using dedicated hotkeys, so you can match your input method to whatever you're working on.
+
+<Tabs>
+  <Tab title="Direct Dictation">
+    ## Direct Dictation
+
+    Direct Dictation is the fastest path from voice to text. FluidVoice transcribes your speech using the local model you've selected and types the result straight into whatever app is in focus — no AI post-processing, no rewriting, no delay beyond the transcription itself.
+
+    Use Direct Dictation when speed matters more than polish: coding, quick notes, chat messages, terminal commands, or any situation where you want exact control over what lands on screen.
+
+    **Example — dictating a quick note:**
+
+    You say:
+    > "add milk eggs and bread to the shopping list"
+
+    FluidVoice types:
+    ```
+    add milk eggs and bread to the shopping list
+    ```
+
+    The raw transcript lands exactly as spoken.
+
+    ### How to activate
+
+    Press your primary dictation hotkey (set during onboarding, or in **Settings → Hotkeys**). The live preview overlay appears while you speak. Release the hotkey (or press it again, depending on your hotkey mode) to finish and type the result.
+
+    <Tip>
+      Direct Dictation is the default mode when AI Enhancement is set to **Off**. Enable Fluid Intelligence or a cloud provider in **Settings → AI Enhancement** to switch to AI-assisted Write Mode automatically.
+    </Tip>
+  </Tab>
+
+  <Tab title="Write Mode">
+    ## Write Mode (Edit Mode)
+
+    Write Mode sends your dictation through an AI model before it reaches the active app. The AI cleans up filler words, fixes capitalization and punctuation, converts spoken numbers and dates to their correct format, and adapts the tone to the context. The result reads like polished writing rather than raw speech.
+
+    Write Mode also works on text you've already typed: select any text in any app, trigger the Edit hotkey, speak your instruction, and FluidVoice rewrites the selection in place.
+
+    **Example — dictating an email:**
+
+    You say:
+    > "hey um so i wanted to follow up on the proposal from last week uh let me know if you have any questions thanks"
+
+    FluidVoice types:
+    ```
+    Hi,
+
+    I wanted to follow up on the proposal from last week. Let me know if you have any questions.
+
+    Thanks
+    ```
+
+    Filler words gone, punctuation correct, structure clean.
+
+    **Example — rewriting selected text:**
+
+    Select a rough paragraph in any app, then trigger Write Mode and say:
+    > "make this more concise and professional"
+
+    FluidVoice rewrites the selection in place and types the result back.
+
+    ### How to activate
+
+    - **Dictate with AI:** Press your primary dictation hotkey. Write Mode runs automatically when AI Enhancement is enabled.
+    - **Rewrite selected text:** Select text in any app, then press your Edit hotkey (default **⌥R**). Speak your rewrite instruction. FluidVoice replaces the selection with the AI-generated result.
+
+    <Note>
+      Write Mode requires an AI provider to be configured. Enable **Fluid Intelligence** for fully on-device enhancement, or add an OpenAI or Groq key in **Settings → AI Enhancement**.
+    </Note>
+  </Tab>
+
+  <Tab title="Command Mode">
+    ## Command Mode
+
+    Command Mode turns your voice into a macOS automation agent. Speak a natural-language instruction and FluidVoice — powered by a language model — figures out what to do, runs the necessary terminal commands, verifies the result, and reports back. You can launch apps, run Shortcuts, manipulate files, create reminders, send messages, and automate workflows, all without touching the keyboard.
+
+    Command Mode runs an agentic loop: it checks prerequisites before acting, executes the command, verifies the outcome, and retries or explains if something goes wrong.
+
+    **Example — launching an app:**
+
+    You say:
+    > "open Safari and go to github dot com"
+
+    FluidVoice executes:
+    ```bash
+    open -a Safari
+    osascript -e 'tell application "Safari" to open location "https://github.com"'
+    ```
+
+    **Example — creating a reminder:**
+
+    You say:
+    > "add a reminder to review the pull request tomorrow at 9 AM"
+
+    FluidVoice executes:
+    ```bash
+    osascript -e 'tell application "Reminders" to make new reminder with properties {name:"Review the pull request", due date:date "tomorrow 9:00 AM"}'
+    ```
+
+    **Example — file operations:**
+
+    You say:
+    > "create a folder called project-alpha in my Desktop"
+
+    FluidVoice checks whether the folder exists, creates it, and confirms success.
+
+    ### How to activate
+
+    Enable Command Mode in **Settings → Command Mode**, assign a hotkey (default: **Right ⌘**), and press it to begin a session. Speak your instruction and wait for FluidVoice to complete the task.
+
+    <Warning>
+      Command Mode can execute terminal commands on your Mac. Destructive operations (deleting files, moving items, running `sudo`) show a confirmation prompt before executing. Keep **Confirm before execute** enabled in **Settings → Command Mode** unless you have a specific reason to disable it.
+    </Warning>
+  </Tab>
+</Tabs>
+
+## Switching Between Modes
+
+<Steps>
+  <Step title="Set up your hotkeys">
+    Open **Settings → Hotkeys**. Assign separate hotkeys for your primary dictation shortcut (Direct Dictation / Write Mode) and your Command Mode shortcut. You can also configure a secondary dictation shortcut that uses a different prompt profile.
+  </Step>
+  <Step title="Use the correct hotkey for the task">
+    Press your **primary dictation hotkey** to start a Direct Dictation or Write Mode session (which one runs depends on your AI Enhancement setting). Press your **Command Mode hotkey** to start a Command Mode session. Press your **Edit hotkey** (default **⌥R**) after selecting text to rewrite it.
+  </Step>
+  <Step title="Watch the overlay">
+    The live preview overlay shows which mode is active and displays your transcription in real time as you speak. Release the hotkey to finish.
+  </Step>
+</Steps>
+
+## Mode Comparison
+
+<CardGroup cols={3}>
+  <Card title="Direct Dictation" icon="bolt">
+    Raw speech-to-text. No AI, no rewriting. Maximum speed, full control over output. Best for code, chat, quick notes.
+  </Card>
+  <Card title="Write Mode" icon="wand-magic-sparkles">
+    AI-polished dictation. Cleans filler words, fixes grammar, adapts tone. Also rewrites selected text on command.
+  </Card>
+  <Card title="Command Mode" icon="terminal">
+    Voice-driven Mac automation. Launches apps, runs Shortcuts, manages files, creates reminders — all from natural speech.
+  </Card>
+</CardGroup>

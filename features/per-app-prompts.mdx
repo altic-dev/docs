@@ -1,0 +1,101 @@
+---
+title: "Per-App Prompt Profiles for Context-Aware Dictation"
+sidebarTitle: "Per-App Prompts"
+description: "Assign custom AI instructions to specific apps so your dictation tone shifts automatically — casual in Slack, formal in Mail, structured in GitHub."
+---
+
+Per-app prompt profiles let you write custom AI instructions that activate automatically when a specific app is in focus. When you dictate in Slack, FluidVoice applies your Slack prompt. When you switch to Mail, it applies your Mail prompt — without any manual switching on your part. The same spoken words come out differently depending on where you're writing, matching the tone and format each context expects.
+
+FluidVoice detects the active app through macOS's accessibility API, which monitors the focused application continuously. No extra configuration is required for detection to work.
+
+## Use Cases
+
+The same raw dictation adapts to whichever app is in focus:
+
+| App | Tone | What FluidVoice does |
+|---|---|---|
+| **Slack** | Casual | Keeps language conversational, trims formality, adds emoji where natural |
+| **Mail** | Formal | Uses complete sentences, professional sign-offs, correct salutations |
+| **GitHub Issues** | Structured | Formats content with headers, bullet points, and action items |
+| **Notes / Quick Notes** | Personal | Preserves your natural speaking voice, minimal cleanup |
+| **Terminal / Code editors** | Raw | Outputs text exactly as spoken, no punctuation added |
+
+## How to Create a Profile
+
+<Steps>
+  <Step title="Open Prompts settings">
+    Go to **Settings → Prompts**.
+  </Step>
+  <Step title="Add a new profile">
+    Click **Add Profile**. Give the profile a descriptive name, such as "Slack — Casual" or "Mail — Formal".
+  </Step>
+  <Step title="Write your prompt">
+    Enter the custom instructions you want the AI to follow when this profile is active. See the example prompts below for inspiration.
+  </Step>
+  <Step title="Set the mode">
+    Choose whether this profile applies to **Dictate mode** (standard dictation) or **Edit mode** (rewriting selected text). You can create separate profiles for each mode within the same app.
+  </Step>
+  <Step title="Bind to an app">
+    Select the target app from the app picker. FluidVoice will activate this profile whenever that app is in focus.
+  </Step>
+</Steps>
+
+## Example Prompts
+
+<CodeGroup>
+  ```text Slack — Casual
+  Make the tone casual and conversational. Fix formatting and remove filler words. 
+  Add emoji where it feels natural and appropriate. Keep it concise.
+  ```
+
+  ```text Mail — Formal
+  Make the tone professional and formal. Fix grammar, punctuation, and sentence 
+  structure. Use complete sentences with proper salutations and sign-offs.
+  ```
+
+  ```text GitHub Issues — Structured
+  Format the output as a structured GitHub issue. Use markdown with clear headers 
+  (## Issue, ## Steps to Reproduce, ## Expected Behavior, ## Resolution). 
+  Use bullet points for lists. Keep language technical and precise.
+  ```
+
+  ```text Quick Notes — Personal
+  Preserve the speaker's natural voice and casual tone. Fix obvious errors only. 
+  Do not restructure sentences or change the register.
+  ```
+
+  ```text Terminal / Code editors — Raw
+  Output raw text only. Do not add punctuation, capitalization changes, or 
+  formatting. Do not modify technical terms, variable names, or commands.
+  ```
+</CodeGroup>
+
+## Dictate Mode vs. Edit Mode Profiles
+
+Every prompt profile targets one of two modes:
+
+- **Dictate mode** — applies during standard voice dictation. The profile shapes how the AI cleans and formats your spoken words before they're typed into the app.
+- **Edit mode** — applies when you use the Edit hotkey to rewrite selected text. The profile shapes how the AI interprets and applies your rewrite instructions.
+
+<Tip>
+  You can create different profiles for Dictate mode and Edit mode within the same app. For example, your Slack Dictate profile could keep things casual, while your Slack Edit profile could be set to make rewrites shorter and more direct.
+</Tip>
+
+## Routing Scope
+
+Each mode has a **routing scope** setting that controls how broadly per-app profiles apply:
+
+- **All apps** — the selected prompt profile is used as the global default for all apps, with per-app bindings overriding it for specific apps.
+- **Selected apps only** — the selected prompt profile is only active for apps that have an explicit binding. All other apps use the built-in default prompt.
+
+Set the routing scope in **Settings → Prompts** for each mode independently.
+
+## How App Detection Works
+
+FluidVoice uses macOS's accessibility API to monitor which application is currently focused. When you press your dictation hotkey, FluidVoice reads the active app's bundle identifier and looks up any matching prompt binding for the current mode. The matching profile's instructions are sent to the AI provider as part of the system prompt — no manual selection required on your part.
+
+Detection is automatic and real-time. Switching apps between dictation sessions is enough for the correct profile to activate on your next dictation.
+
+<Note>
+  Per-app prompt profiles require AI Enhancement to be enabled. If enhancement is set to **Off**, profiles have no effect and FluidVoice types the raw transcript directly.
+</Note>

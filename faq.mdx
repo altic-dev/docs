@@ -1,0 +1,142 @@
+---
+title: "FluidVoice Frequently Asked Questions"
+sidebarTitle: "FAQ"
+description: "Answers to common questions about FluidVoice: pricing, compatibility, supported models, privacy, permissions, and how to get started."
+---
+
+FluidVoice is a free, open-source macOS dictation app with on-device AI enhancement. If you're evaluating it, just getting started, or running into a question mid-setup, you'll find the most common answers below. Can't find what you're looking for? Join the community on [Discord](https://discord.gg/VUPHaKSvYV).
+
+<AccordionGroup>
+
+  <Accordion title="Is FluidVoice free?">
+    Yes. FluidVoice is completely free and open source—no subscription, no paid tiers, no feature gating. The core dictation experience works out of the box at no cost.
+
+    If FluidVoice is useful to you, you can support continued development (including future iOS and Windows work) through [GitHub Sponsors](https://github.com/sponsors/altic-dev).
+  </Accordion>
+
+  <Accordion title="What macOS version does FluidVoice require?">
+    FluidVoice requires **macOS 15.0 Sequoia or later**. It will not run on older versions of macOS.
+
+    You also need to grant microphone access for voice capture and accessibility permissions for typing into other apps. FluidVoice guides you through both during onboarding.
+  </Accordion>
+
+  <Accordion title="Does FluidVoice support Intel Macs?">
+    Yes. FluidVoice supports Intel Macs using **Whisper models** (from version 1.5.1 onward). All other models—Nemotron, Parakeet, Cohere, and Apple Speech—require Apple Silicon.
+
+    If you're on an Intel Mac, select a Whisper model during onboarding.
+  </Accordion>
+
+  <Accordion title="Which speech models does FluidVoice support?">
+    FluidVoice supports a wide range of local speech recognition models:
+
+    | Model | Best for | Download size | Hardware |
+    |---|---|---|---|
+    | Nemotron Speech 3.5 — Ultra Fast Low Latency | Streaming multilingual dictation | ~670 MB | Apple Silicon |
+    | Nemotron 3.5 Multilingual | Higher-accuracy multilingual dictation | ~530 MB | Apple Silicon |
+    | Parakeet Flash (Beta) | Lowest-latency English dictation | ~250 MB | Apple Silicon |
+    | Parakeet TDT v3 | Fast multilingual dictation | ~500 MB | Apple Silicon |
+    | Parakeet TDT v2 | Fast English-only dictation | ~500 MB | Apple Silicon |
+    | Cohere Transcribe | High-accuracy multilingual dictation | ~1.4 GB | Apple Silicon |
+    | Apple Speech | Zero-download native macOS speech | Built-in | Apple Silicon + Intel |
+    | Whisper Tiny / Base / Small / Medium / Large | Broad compatibility, Intel support | ~75 MB – ~2.9 GB | Apple Silicon + Intel |
+
+    Choose a model based on your language needs and how much disk space you want to use.
+  </Accordion>
+
+  <Accordion title="What is Fluid Intelligence and the Fluid-1 model?">
+    **Fluid Intelligence** is a local AI runtime that runs the **Fluid-1** model directly on your Mac. It provides advanced on-device dictation enhancement:
+
+    - Smart formatting and structure
+    - Context-aware capitalization
+    - Adaptive tone based on the active app
+    - Post-processing of rough dictation into clean, polished text
+
+    Everything runs locally—no cloud connection, no API key, and no data leaves your machine. Fluid Intelligence is fully optional and requires approximately **3.5 GB** of disk space for the model download.
+
+    FluidVoice works great on its own without Fluid Intelligence. You can download and enable it during onboarding or at any time from Settings.
+  </Accordion>
+
+  <Accordion title="How many languages does FluidVoice support?">
+    Language support depends on which speech model you use:
+
+    - **Nemotron Speech 3.5** — approximately 40 languages, including Spanish, Italian, Portuguese, Hindi, Korean, English, German, French, Russian, Turkish, Vietnamese, Dutch, Japanese, Arabic, Ukrainian, and more
+    - **Parakeet Flash (Beta)** — English only
+    - **Parakeet TDT v3** — 25 languages: Bulgarian, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, German, Greek, Hungarian, Italian, Latvian, Lithuanian, Maltese, Polish, Portuguese, Romanian, Slovak, Slovenian, Spanish, Swedish, Russian, and Ukrainian
+    - **Parakeet TDT v2** — English only
+    - **Cohere Transcribe** — 14 languages: English, French, German, Italian, Spanish, Portuguese, Greek, Dutch, Polish, Mandarin Chinese, Japanese, Korean, Vietnamese, and Arabic
+    - **Apple Speech** — depends on the speech recognition languages installed on your Mac
+    - **Whisper** — up to 99 languages, depending on the model size you choose
+
+    For the broadest language support, use Nemotron Speech 3.5 or Whisper.
+  </Accordion>
+
+  <Accordion title="Does FluidVoice work offline?">
+    Yes. FluidVoice is local-first. All speech recognition runs on-device using local models—no internet connection is required for dictation.
+
+    The only time FluidVoice requires a network connection is if you choose to use a cloud AI provider (OpenAI, Groq, or a custom provider) for post-processing. Fluid Intelligence and all built-in speech models run entirely offline.
+  </Accordion>
+
+  <Accordion title="What permissions does FluidVoice need?">
+    FluidVoice requires two permissions:
+
+    1. **Microphone** — to capture your voice for speech recognition. Without this, the hotkey does nothing.
+    2. **Accessibility** — to type transcribed text into any app via macOS Accessibility APIs. Without this, FluidVoice can transcribe but cannot insert text.
+
+    FluidVoice requests both permissions during onboarding with guided instructions. You can also grant or revoke them at any time in **System Settings → Privacy & Security**.
+
+    See the [Permissions guide](/configuration/permissions) for full details.
+  </Accordion>
+
+  <Accordion title="Does FluidVoice send my voice or text to the cloud?">
+    No—not by default. Your voice recordings and transcribed text stay on your Mac.
+
+    The only exception is if you explicitly choose a cloud AI provider (OpenAI, Groq, or a custom endpoint) for dictation enhancement. In that case, your transcription text is sent to that provider's API. If you use **Fluid Intelligence** instead, everything remains local.
+
+    FluidVoice never sends your audio or text to ALTIC or any third party as part of normal operation.
+  </Accordion>
+
+  <Accordion title="What does FluidVoice analytics collect?">
+    FluidVoice includes optional anonymous analytics (enabled by default) to help track app health and feature usage.
+
+    **Collected:**
+    - App version, build number, and macOS version
+    - Low-cardinality feature and configuration flags (e.g., which mode is active)
+    - Approximate usage ranges (not exact values)
+    - High-level success and error outcomes
+
+    **Never collected:**
+    - Voice recordings, raw audio, or transcribed text
+    - Selected text, prompts, or AI responses
+    - Terminal commands, window titles, file paths, clipboard contents, or typed text
+    - Any personal or private information
+
+    To disable analytics, go to **Settings → Share Anonymous Analytics** and toggle it off.
+  </Accordion>
+
+  <Accordion title="Where can I download FluidVoice?">
+    Install FluidVoice with Homebrew:
+
+    ```bash
+    brew install --cask fluidvoice
+    ```
+
+    Or download the latest release directly from GitHub:
+
+    [https://github.com/altic-dev/FluidVoice/releases/latest](https://github.com/altic-dev/FluidVoice/releases/latest)
+  </Accordion>
+
+  <Accordion title="How do I join the community?">
+    Connect with other FluidVoice users and follow development through these channels:
+
+    - **Discord** — [discord.gg/VUPHaKSvYV](https://discord.gg/VUPHaKSvYV) — the main community hub for questions, feedback, and announcements
+    - **GitHub** — [github.com/altic-dev/FluidVoice](https://github.com/altic-dev/FluidVoice) — source code, issues, and pull requests
+    - **X / Twitter** — [@ALTIC_DEV](https://x.com/ALTIC_DEV) — development updates and announcements
+  </Accordion>
+
+  <Accordion title="What license does FluidVoice use?">
+    From **2026-02-23** onward, FluidVoice is licensed under the **GNU General Public License v3.0 (GPLv3)**. Versions published before that date were licensed under Apache License 2.0.
+
+    You can read the full license in the [repository](https://github.com/altic-dev/FluidVoice/blob/main/LICENSE).
+  </Accordion>
+
+</AccordionGroup>

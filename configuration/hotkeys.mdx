@@ -1,0 +1,74 @@
+---
+title: "Configuring Global Hotkeys in FluidVoice"
+sidebarTitle: "Hotkeys"
+description: "Set up global hotkeys to trigger voice capture from anywhere on your Mac—no app switching needed, no interruptions to your workflow."
+---
+
+FluidVoice uses a global hotkey to start voice capture from any app on your Mac. Press your chosen key combination, speak, and your transcribed text lands wherever your cursor is—no switching windows, no clicking. This page explains how to set your hotkeys, choose an activation mode, and avoid conflicts with other apps.
+
+## Primary and Secondary Hotkey Slots
+
+FluidVoice gives you two independent hotkey slots:
+
+- **Primary Dictation Shortcut** — your main trigger for dictation. This is the hotkey you'll use the vast majority of the time.
+- **Secondary Dictation Shortcut** — an optional second trigger you can assign to a different dictation profile or mode. For example, use your primary hotkey for casual dictation and your secondary for a formal-tone prompt profile.
+
+Both slots are configured independently and can use entirely different key combinations.
+
+## How to Set a Hotkey
+
+<Steps>
+  <Step title="Open Settings">
+    Click the FluidVoice icon in your menu bar, then select **Settings**.
+  </Step>
+  <Step title="Go to the Hotkeys section">
+    Select **Hotkeys** in the Settings sidebar.
+  </Step>
+  <Step title="Click the hotkey field">
+    Click the field next to **Primary Dictation Shortcut** (or **Secondary Dictation Shortcut**) to focus it.
+  </Step>
+  <Step title="Press your desired key combination">
+    Press the key or key combination you want to use. FluidVoice records it immediately. The field updates to show the captured shortcut.
+  </Step>
+</Steps>
+
+<Tip>
+  The **Option key (⌥) alone** is the recommended default. It's easy to reach, rarely conflicts with other apps, and is comfortable to hold during longer dictations. Other great options include **⌥Space** and **⌥⌘D**.
+</Tip>
+
+## Hotkey Activation Modes
+
+FluidVoice supports three activation modes. Choose the one that fits how you dictate:
+
+<CardGroup cols={3}>
+  <Card title="Hold" icon="hand">
+    **Hold to record, release to stop.** Recording runs only while you keep the key pressed. Ideal for short, focused bursts.
+  </Card>
+  <Card title="Toggle" icon="toggle-on">
+    **Tap once to start, tap again to stop.** Great for longer dictations where you don't want to hold a key down.
+  </Card>
+  <Card title="Automatic (Both)" icon="wand-magic-sparkles">
+    **Tap to toggle, hold for push-to-talk.** FluidVoice detects your intent and switches modes accordingly.
+  </Card>
+</CardGroup>
+
+To change the activation mode, go to **Settings → Hotkeys** and select your preferred mode from the **Activation Mode** picker.
+
+## Avoiding Conflicts with Other Apps
+
+Global hotkeys intercept key combinations system-wide, so it's important to pick a combination that doesn't collide with shortcuts in apps you use regularly.
+
+**Tips for conflict-free hotkeys:**
+
+- **Use ⌥ (Option) alone.** Few apps claim the bare Option key as a global shortcut.
+- **Avoid ⌘-based combinations** like ⌘Space (Spotlight) or ⌘⇧4 (screenshot).
+- **Check your other apps.** Password managers, clipboard tools, and launcher apps often register their own global shortcuts. Open each app's settings to verify.
+- **Use the secondary slot** for a less-used combination rather than fighting for a prime key combo.
+
+If FluidVoice detects that your primary and secondary shortcuts conflict with each other, it displays a warning in Settings.
+
+## Assigning a Profile to the Secondary Hotkey
+
+The secondary hotkey can be configured to activate a specific dictation profile—for example, a prompt tuned for formal writing or a particular language. 
+
+To assign a profile to the secondary slot, go to **Settings → Hotkeys**, set a key combination for **Secondary Dictation Shortcut**, then choose the profile from the prompt selector below it. When you press the secondary hotkey, FluidVoice uses that profile instead of your primary selection.

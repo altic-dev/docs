@@ -1,0 +1,80 @@
+---
+title: "Install FluidVoice on macOS"
+sidebarTitle: "Installation"
+description: "Install FluidVoice via Homebrew or a direct download, then complete first-launch onboarding to grant permissions and choose your speech model."
+---
+
+FluidVoice is free and requires no account to install. You have two options: Homebrew (recommended for developers) or a direct download from GitHub Releases. Both install the same app — choose whichever fits your workflow.
+
+## System requirements
+
+Before installing, confirm your Mac meets the following requirements.
+
+| Requirement | Details |
+|---|---|
+| macOS version | 15.0 Sequoia or later |
+| Processor | Apple Silicon (M-series) recommended |
+| Intel Mac support | Whisper models only, from version 1.5.1+ |
+| Microphone | Required for voice capture |
+| Accessibility permissions | Required for typing into other apps |
+| Disk space — voice model | ~1 GB |
+| Disk space — Fluid Intelligence | ~3.5 GB (optional) |
+
+<Note>
+  If you are on an Intel Mac, FluidVoice still works — but only with Whisper models. All other speech models require Apple Silicon.
+</Note>
+
+## Install FluidVoice
+
+Choose either method below. Both install the same release.
+
+<CodeGroup>
+```bash Homebrew
+brew install --cask fluidvoice
+```
+
+```bash Manual download
+# Visit the releases page and download the latest .dmg
+open https://github.com/altic-dev/FluidVoice/releases/latest
+```
+</CodeGroup>
+
+After the Homebrew command finishes, FluidVoice appears in your Applications folder and is ready to launch. If you used the manual download, open the `.dmg`, drag FluidVoice to Applications, then launch it from there.
+
+<Tip>
+  Homebrew makes future updates easy — run `brew upgrade --cask fluidvoice` any time to get the latest version. FluidVoice also supports in-app auto-updates for convenience.
+</Tip>
+
+## First launch and onboarding
+
+When you open FluidVoice for the first time, an onboarding flow guides you through the required setup:
+
+1. **Microphone permission** — macOS will prompt you to allow microphone access. Click **Allow**. FluidVoice cannot capture your voice without this.
+2. **Accessibility permission** — FluidVoice needs accessibility access to type into other apps via the macOS Accessibility API. Open **System Settings → Privacy & Security → Accessibility** and enable FluidVoice.
+3. **Language and model selection** — choose a speech model based on your language and preferred latency. See the [Speech Models overview](/models/overview) for a full comparison.
+4. **Fluid Intelligence setup (optional)** — download the local Fluid-1 AI model (~3.5 GB) for on-device dictation enhancement. You can skip this and add it later in Settings.
+5. **Try dictation** — the onboarding flow ends with a live dictation tryout so you can confirm everything works before closing the wizard.
+
+<Warning>
+  Both microphone access and accessibility permissions are required for core dictation functionality. If you skip the accessibility permission, FluidVoice can transcribe speech but cannot type the result into other apps.
+</Warning>
+
+## Disk space
+
+| Component | Size | Required? |
+|---|---|---|
+| FluidVoice app | Small (< 50 MB) | Yes |
+| Voice model (e.g. Parakeet TDT v3) | ~500 MB – ~1 GB | Yes (one model) |
+| Fluid Intelligence (Fluid-1 model) | ~3.5 GB | No — optional |
+
+You only need one voice model to get started. Apple Speech is built into macOS and requires no download at all, making it the fastest way to get up and running.
+
+## Intel Mac support
+
+<Info>
+  Intel Mac support was added in FluidVoice 1.5.1. If you are on an Intel Mac, install FluidVoice and select a Whisper model during onboarding. Whisper supports up to 99 languages across five model sizes (Tiny to Large), so you have plenty of flexibility even without Apple Silicon.
+</Info>
+
+## Updating FluidVoice
+
+FluidVoice checks for updates automatically. To update manually, go to **Settings → Automatic Updates** and click **Check for Updates**. To get early access to new features, enable **Beta Releases** in the same panel.

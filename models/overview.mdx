@@ -1,0 +1,106 @@
+---
+title: "Speech Models Available in FluidVoice"
+sidebarTitle: "Models Overview"
+description: "Compare every speech model FluidVoice supports — latency, language coverage, download size, and hardware requirements — to find your best fit."
+---
+
+FluidVoice ships with support for eight distinct speech model families, ranging from the zero-download Apple Speech engine built into macOS to large multilingual models like Whisper Large. Each model runs entirely on your device — no audio leaves your Mac during transcription. The right choice depends on your language, how much disk space you can spare, and how fast you need words to appear on screen.
+
+<Note>
+  All models download to local storage on your Mac and run entirely on-device. Your voice and transcribed text are never sent to the cloud.
+</Note>
+
+## Model lineup
+
+| Model | Best for | Language support | Download size | Hardware |
+|---|---|---|---|---|
+| Nemotron Speech 3.5 — Ultra Fast Low Latency | Streaming-capable multilingual dictation | ~40 languages | ~670 MB | Apple Silicon |
+| Nemotron 3.5 Multilingual | Higher-accuracy multilingual dictation | ~40 languages | ~530 MB | Apple Silicon |
+| Parakeet Flash (Beta) | Lowest-latency live English dictation | English | ~250 MB | Apple Silicon |
+| Parakeet TDT v3 | Fast default multilingual dictation | 25 languages | ~500 MB | Apple Silicon |
+| Parakeet TDT v2 | Fastest English-only dictation | English | ~500 MB | Apple Silicon |
+| Cohere Transcribe | High-accuracy multilingual dictation | 14 languages | ~1.4 GB | Apple Silicon |
+| Apple Speech | Zero-download native macOS speech | System languages | Built-in | Apple Silicon + Intel |
+| Whisper Tiny / Base / Small / Medium / Large | Broad compatibility, including Intel Macs | 99 languages | ~75 MB – ~2.9 GB | Apple Silicon + Intel |
+
+---
+
+## Model details
+
+### Nemotron Speech 3.5 — Ultra Fast Low Latency
+
+Use this model when you want streaming-style multilingual dictation — words appear on screen as you speak with minimal lag. It covers roughly the same ~40-language range as the Multilingual variant but prioritises real-time throughput over peak accuracy. It requires Apple Silicon.
+
+### Nemotron 3.5 Multilingual
+
+Choose this model when accuracy matters more than raw speed. It processes audio in a slightly less aggressive streaming mode than the Ultra Fast variant, producing cleaner transcripts across the same ~40-language range. It requires Apple Silicon.
+
+<Tabs>
+  <Tab title="Nemotron Speech 3.5 languages (~40)">
+    Nemotron Speech 3.5 supports approximately 40 languages. Refer to the [NVIDIA model card](https://huggingface.co/nvidia) for the full and up-to-date list.
+  </Tab>
+</Tabs>
+
+### Parakeet Flash (Beta)
+
+Parakeet Flash delivers the lowest perceived latency of any model in FluidVoice — text lands on screen fast enough to feel instantaneous. It is English-only and is the best pick for developers, power users, or anyone who dictates in English and wants speed above all else. It requires Apple Silicon.
+
+### Parakeet TDT v3
+
+Parakeet TDT v3 is the recommended starting point for most multilingual users. It balances speed and accuracy across 25 European languages and is the default model FluidVoice suggests during onboarding. It requires Apple Silicon.
+
+<Tabs>
+  <Tab title="Parakeet TDT v3 languages (25)">
+    Bulgarian, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, German, Greek, Hungarian, Italian, Latvian, Lithuanian, Maltese, Polish, Portuguese, Romanian, Russian, Slovak, Slovenian, Spanish, Swedish, Ukrainian.
+  </Tab>
+</Tabs>
+
+### Parakeet TDT v2
+
+Use Parakeet TDT v2 when you dictate exclusively in English and want the fastest possible throughput. It is functionally similar to Parakeet Flash but draws on an earlier generation of the model architecture. It requires Apple Silicon.
+
+### Cohere Transcribe
+
+Cohere Transcribe prioritises transcription accuracy over raw speed and covers 14 languages including Mandarin, Japanese, Korean, Vietnamese, and Arabic — languages not available in the Parakeet family. At ~1.4 GB it is the largest download in the lineup. It requires Apple Silicon.
+
+<Tabs>
+  <Tab title="Cohere Transcribe languages (14)">
+    English, French, German, Italian, Spanish, Portuguese, Greek, Dutch, Polish, Mandarin, Japanese, Korean, Vietnamese, Arabic.
+  </Tab>
+</Tabs>
+
+### Apple Speech
+
+Apple Speech uses the speech recognition engine built into macOS — no download required. It works on both Apple Silicon and Intel Macs and supports whatever languages your macOS installation has available. Use this model if you are on an Intel Mac and want the simplest possible setup, or if you are on Apple Silicon but have no disk space to spare.
+
+### Whisper Tiny / Base / Small / Medium / Large
+
+The Whisper family offers the broadest language coverage (up to 99 languages) and is the only third-party option that runs on Intel Macs. Smaller variants (Tiny, Base) are fast and lightweight; larger variants (Medium, Large) trade speed for accuracy. Choose Whisper if you need a language that no other model covers, or if you are on an Intel Mac.
+
+<Tabs>
+  <Tab title="Whisper language coverage">
+    Whisper supports up to 99 languages depending on the model size you choose. Larger models (Medium, Large) recognise a wider range of languages more accurately than smaller ones. Refer to the [OpenAI Whisper model card](https://github.com/openai/whisper#available-models-and-languages) for the complete language list.
+  </Tab>
+  <Tab title="Whisper model sizes">
+    | Variant | Download size | Notes |
+    |---|---|---|
+    | Tiny | ~75 MB | Fastest, lowest accuracy |
+    | Base | ~142 MB | Good balance for simple use cases |
+    | Small | ~466 MB | Recommended for Intel Macs |
+    | Medium | ~1.5 GB | Strong multilingual accuracy |
+    | Large | ~2.9 GB | Highest accuracy across 99 languages |
+  </Tab>
+</Tabs>
+
+---
+
+## How to download a model
+
+<Steps>
+  <Step title="Open FluidVoice for the first time">
+    The onboarding flow prompts you to select and download a model before you start dictating. Follow the on-screen steps to choose your language and latency preference, then let the download finish.
+  </Step>
+  <Step title="Switch or add a model later">
+    Open **Settings → Voice Engine → Change Model**, select the model you want, and click **Download**. You can switch between any downloaded models at any time.
+  </Step>
+</Steps>

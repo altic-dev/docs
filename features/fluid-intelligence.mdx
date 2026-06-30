@@ -1,0 +1,138 @@
+---
+title: "Fluid Intelligence: Local AI Dictation Enhancement"
+sidebarTitle: "Fluid Intelligence"
+description: "Run the Fluid-1 model entirely on your Mac for smart formatting, adaptive tone, and on-device AI enhancement with no API key required."
+---
+
+Fluid Intelligence is a local AI runtime that runs the **Fluid-1 model** directly on your Mac. When you dictate, Fluid-1 processes the raw transcript before FluidVoice types anything into the active app — cleaning up filler words, applying correct capitalization, formatting numbers and dates, and adapting the tone to the app you're working in. Everything happens on-device. No data leaves your Mac, no API key is required, and no subscription is involved. Fluid Intelligence is entirely optional: FluidVoice works great without it.
+
+<Note>
+  Fluid Intelligence requires an **Apple Silicon Mac** (M1 or later). It is not available on Intel Macs. The model download is approximately **3.5 GB**.
+</Note>
+
+## What Fluid-1 Does
+
+Fluid-1 is purpose-built for dictation post-processing. Unlike general-purpose language models, it is tuned specifically to turn raw spoken transcripts into polished, correctly formatted text. Its capabilities include:
+
+<CardGroup cols={2}>
+  <Card title="Smart Formatting" icon="align-left">
+    Adds correct punctuation, paragraph breaks, and structure. Spoken instructions like "new line" or "bullet point" are executed rather than transcribed.
+  </Card>
+  <Card title="Context-Aware Capitalization" icon="font-case">
+    Capitalizes sentence starts, proper nouns, and headings correctly based on the surrounding context — not just simple rules.
+  </Card>
+  <Card title="Adaptive Tone Per App" icon="sliders">
+    Detects the active app and adjusts tone automatically. Slack gets casual, Mail gets formal, GitHub Issues gets structured — using your per-app prompt profiles.
+  </Card>
+  <Card title="Dates, Names & Numbers" icon="calendar">
+    Converts spoken numbers and times to their correct written form: "five thirty" → 5:30, "twelve fifty" → $12.50, "december twenty fifth" → December 25th.
+  </Card>
+  <Card title="Filler Word Removal" icon="eraser">
+    Removes "um", "uh", "like", "you know", and false starts so your dictated text reads like something you meant to write.
+  </Card>
+  <Card title="Emoji Support" icon="face-smile">
+    Converts spoken emoji names to the actual emoji: "thumbs up" → 👍, "heart emoji" → ❤️, "fire emoji" → 🔥.
+  </Card>
+  <Card title="Hyphens & Compound Words" icon="minus">
+    Correctly formats hyphenated words, compound terms, and technical phrases that speech models often run together.
+  </Card>
+  <Card title="Self-Correction Handling" icon="rotate-left">
+    Detects spoken corrections ("no wait", "scratch that", "actually") and discards the text before them, keeping only what you meant to say.
+  </Card>
+</CardGroup>
+
+## Fluid Intelligence vs. Cloud AI Providers
+
+FluidVoice supports several AI enhancement providers, including OpenAI and Groq. Fluid Intelligence is different in every meaningful way:
+
+| | Fluid Intelligence | Cloud Providers (OpenAI, Groq) |
+|---|---|---|
+| **Runs on** | Your Mac, locally | Remote servers |
+| **Data leaves your Mac** | Never | Yes (transcripts sent to provider) |
+| **API key required** | No | Yes |
+| **Cost** | Free | Pay-per-use or subscription |
+| **Download required** | ~3.5 GB (one-time) | None |
+| **Hardware requirement** | Apple Silicon | Any |
+| **Latency** | On-device inference | Network round-trip |
+
+<Tip>
+  Fluid Intelligence is the only enhancement option where your voice and text never leave the device under any circumstances. If privacy is a priority, use Fluid Intelligence instead of cloud providers.
+</Tip>
+
+## How to Enable Fluid Intelligence
+
+<Steps>
+  <Step title="Open AI Enhancement settings">
+    Go to **Settings → AI Enhancement**.
+  </Step>
+  <Step title="Select Fluid Intelligence">
+    Choose **Fluid Intelligence** from the provider list. If the model is not yet downloaded, FluidVoice prompts you to download it.
+  </Step>
+  <Step title="Download the model">
+    Confirm the download (~3.5 GB). The model downloads in the background. You can continue using FluidVoice with another provider while the download completes.
+  </Step>
+  <Step title="Start dictating">
+    Once the download finishes, Fluid Intelligence activates automatically. Your next dictation session will use Fluid-1 for post-processing.
+  </Step>
+</Steps>
+
+You can also enable Fluid Intelligence during the initial onboarding flow. When FluidVoice asks about AI Enhancement setup, select **Fluid Intelligence** and follow the same download prompt.
+
+## Demo Scenarios
+
+These are real examples of what Fluid-1 handles in everyday dictation:
+
+**Email formatting**
+
+Raw transcript:
+> "hey um so i wanted to reach out about the meeting on thursday uh can we move it to friday at two pm thanks"
+
+Fluid-1 output:
+```
+Hi,
+
+I wanted to reach out about the meeting on Thursday — can we move it to Friday at 2 PM?
+
+Thanks
+```
+
+**Casual tone with emoji**
+
+Raw transcript:
+> "just shipped the fix lgtm thumbs up fire emoji"
+
+Fluid-1 output:
+```
+Just shipped the fix. LGTM 👍🔥
+```
+
+**Hyphens and numbers**
+
+Raw transcript:
+> "the api key is twenty four characters and expires in thirty days"
+
+Fluid-1 output:
+```
+The API key is 24 characters and expires in 30 days.
+```
+
+**Self-correction**
+
+Raw transcript:
+> "send the invoice to john no wait send it to sarah"
+
+Fluid-1 output:
+```
+Send the invoice to Sarah.
+```
+
+## Fluid Intelligence as a Private Model
+
+Fluid Intelligence is a **separate, privately maintained** runtime from the open-source FluidVoice app. The core FluidVoice app is fully open-source under GPLv3. Fluid Intelligence is kept private so the team can sustainably fund ongoing model development and offer the core dictation experience for free. This may change in the future.
+
+## Requirements
+
+- macOS 15.0 (Sequoia) or later
+- Apple Silicon Mac (M1, M2, M3, or later)
+- ~3.5 GB of available disk space for the model
+- No internet connection required after the initial download

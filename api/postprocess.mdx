@@ -1,0 +1,77 @@
+---
+title: "POST /v1/postprocess — Run AI Post-Processing"
+sidebarTitle: "POST /v1/postprocess"
+description: "Send raw transcription text to FluidVoice's AI enhancement pipeline and receive polished, formatted output using your configured AI provider."
+---
+
+The postprocess endpoint sends a text string through the AI enhancement pipeline configured in FluidVoice and returns polished output. This is the same enhancement step that runs automatically after dictation — you can call it independently to build multi-step pipelines where transcription and enhancement happen separately.
+
+FluidVoice uses whichever AI provider you have configured in **Settings → AI Enhancement**: Fluid Intelligence (fully local), OpenAI, Groq, a custom provider, or none. If no AI provider is enabled, the endpoint returns an error.
+
+## Request
+
+```
+POST /v1/postprocess
+```
+
+The endpoint accepts either a JSON body or a plain text body.
+
+### JSON body
+
+```bash
+curl http://localhost:47733/v1/postprocess \
+  -H "Content-Type: application/json" \
+  -d '{"text": "hey so the deploy is scheduled for friday at nine am pacific right"}'
+```
+
+<ParamField body="text" type="string" required>
+  The raw transcription text to enhance. This is typically the unedited output from a speech model — informal, unpunctuated, or with filler words — that you want the AI provider to clean up.
+</ParamField>
+
+### Plain text body
+
+If you prefer, send the text directly as a plain UTF-8 string with `Content-Type: text/plain`:
+
+```bash
+curl http://localhost:47733/v1/postprocess \
+  -H "Content-Type: text/plain" \
+  -d "hey so the deploy is scheduled for friday at nine am pacific right"
+```
+
+## Response
+
+```json
+{
+  "model": "fluid-1",
+  "provider": "fluid-intelligence",
+  "text": "The deployment is scheduled for Friday at 9 AM Pacific, right?"
+}
+```
+
+<ResponseField name="text" type="string" required>
+  The enhanced, post-processed text returned by the AI provider.
+</ResponseField>
+
+<ResponseField name="provider" type="string" required>
+  An identifier for the AI provider that processed the text (e.g. `"fluid-intelligence"`, `"openai"`, `"groq"`).
+</ResponseField>
+
+<ResponseField name="model" type="string" required>
+  The specific model used by the provider (e.g. `"fluid-1"`, `"gpt-4o"`, `"llama-3.3-70b-versatile"`).
+</ResponseField>
+
+## Error responses
+
+| Status | Body | Meaning |
+|--------|------|---------|
+| `400` | `{"error": "..."}` | No AI provider is configured, the text body is empty, or the provider returned an error. Check **Settings → AI Enhancement** to ensure a provider is enabled. |
+| `400` | `{"error": "Invalid JSON text payload."}` | The request had `Content-Type: application/json` but the body could not be parsed as JSON. |
+| `400` | `{"error": "Text body must be UTF-8."}` | A plain text body was sent but the bytes are not valid UTF-8. |
+
+<Note>
+  If you have AI enhancement disabled in FluidVoice settings, this endpoint will return an error. Enable an AI provider in **Settings → AI Enhancement** before calling `/v1/postprocess`.
+</Note>
+
+<Tip>
+  You can chain `/v1/transcribe` and `/v1/postprocess` to build a two-step pipeline: transcribe an audio file first, then post-process the resulting text. This is useful when you want to inspect the raw transcript before enhancement, or when you want to apply enhancement to text from a different source.
+</Tip>

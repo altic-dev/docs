@@ -1,0 +1,139 @@
+---
+title: "GET /v1/history — Retrieve Transcription History"
+sidebarTitle: "GET /v1/history"
+description: "Fetch your most recent FluidVoice transcription entries, including raw and AI-processed text, the app context, and whether enhancement was applied."
+---
+
+The history endpoint returns a list of recent transcription entries from FluidVoice's local history store, ordered from most recent to oldest. Each entry includes both the raw speech model output and the final text after AI enhancement (if it was applied), along with metadata about which app and window were active at the time.
+
+## Request
+
+```
+GET /v1/history
+```
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  The maximum number of history entries to return. Defaults to `100`. The maximum allowed value is `1000`. Values below `1` are clamped to `1`. Values above `1000` are clamped to `1000`.
+</ParamField>
+
+### Examples
+
+**Fetch the most recent 100 entries (default):**
+
+```bash
+curl "http://localhost:47733/v1/history"
+```
+
+**Fetch the 10 most recent entries:**
+
+```bash
+curl "http://localhost:47733/v1/history?limit=10"
+```
+
+**Fetch up to 500 entries:**
+
+```bash
+curl "http://localhost:47733/v1/history?limit=500"
+```
+
+## Response
+
+```json
+{
+  "count": 2,
+  "items": [
+    {
+      "aiProcessingError": null,
+      "appName": "Slack",
+      "characterCount": 22,
+      "finalText": "The deployment failed.",
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "originalText": "hey so um the deploy broke",
+      "processedText": "The deployment failed.",
+      "rawText": "hey so um the deploy broke",
+      "timestamp": "2025-01-15T09:41:00Z",
+      "wasAIProcessed": true,
+      "windowTitle": "#engineering"
+    },
+    {
+      "aiProcessingError": null,
+      "appName": "Notion",
+      "characterCount": 47,
+      "finalText": "Add a section for onboarding docs to the wiki.",
+      "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "originalText": "add a section for onboarding docs to the wiki",
+      "processedText": "Add a section for onboarding docs to the wiki.",
+      "rawText": "add a section for onboarding docs to the wiki",
+      "timestamp": "2025-01-15T09:38:22Z",
+      "wasAIProcessed": true,
+      "windowTitle": "Team Wiki"
+    }
+  ]
+}
+```
+
+<ResponseField name="count" type="integer" required>
+  The number of items returned in this response. Equal to or less than the requested `limit`.
+</ResponseField>
+
+<ResponseField name="items" type="array" required>
+  An array of transcription history entries, ordered from most recent to oldest.
+
+  <Expandable title="Item fields">
+    <ResponseField name="id" type="string" required>
+      A UUID that uniquely identifies this history entry.
+    </ResponseField>
+
+    <ResponseField name="timestamp" type="string" required>
+      The ISO 8601 date-time string recording when this dictation occurred (e.g. `"2025-01-15T09:41:00Z"`).
+    </ResponseField>
+
+    <ResponseField name="originalText" type="string" required>
+      The raw text produced directly by the speech model, before any AI enhancement. Same as `rawText`.
+    </ResponseField>
+
+    <ResponseField name="finalText" type="string" required>
+      The text that was ultimately typed into the target app. If AI enhancement ran successfully, this is the enhanced text. If enhancement was skipped or failed, this equals `rawText`. Same as `processedText`.
+    </ResponseField>
+
+    <ResponseField name="rawText" type="string" required>
+      The unmodified speech-model output. Alias for `originalText`.
+    </ResponseField>
+
+    <ResponseField name="processedText" type="string" required>
+      The text after AI post-processing. Alias for `finalText`.
+    </ResponseField>
+
+    <ResponseField name="appName" type="string" required>
+      The name of the application that was frontmost when dictation occurred (e.g. `"Slack"`, `"Notion"`, `"Terminal"`).
+    </ResponseField>
+
+    <ResponseField name="windowTitle" type="string" required>
+      The title of the active window or document at the time of dictation (e.g. `"#engineering"`, `"Team Wiki"`).
+    </ResponseField>
+
+    <ResponseField name="characterCount" type="integer" required>
+      The number of characters in `finalText`.
+    </ResponseField>
+
+    <ResponseField name="wasAIProcessed" type="boolean" required>
+      `true` if AI enhancement ran and produced a result for this entry; `false` if enhancement was skipped or not configured.
+    </ResponseField>
+
+    <ResponseField name="aiProcessingError" type="string | null" required>
+      An error message string if AI enhancement failed, or `null` if enhancement succeeded or was not attempted.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Error responses
+
+| Status | Meaning |
+|--------|---------|
+| `405` | You used a method other than `GET`. |
+
+<Note>
+  History entries are stored locally on your Mac. If you have not used FluidVoice yet, or if you have cleared history from the app, the `items` array will be empty and `count` will be `0`.
+</Note>

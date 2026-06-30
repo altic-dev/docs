@@ -1,0 +1,44 @@
+---
+title: "Local API Security: Loopback-Only Access"
+sidebarTitle: "Security"
+description: "FluidVoice's Local API requires no API keys or tokens. Access is restricted to the loopback interface — only processes on your Mac can reach it."
+---
+
+The FluidVoice Local API does not use API keys, bearer tokens, or any other form of credential-based authentication. Instead, it relies entirely on network-level isolation: the server listens only on the loopback interface and rejects every connection that does not originate from `localhost`.
+
+## How loopback restriction works
+
+When a new TCP connection arrives, FluidVoice checks the remote address before the request is even parsed. Connections from `127.0.0.1` (IPv4 loopback), `::1` (IPv6 loopback), or the hostname `localhost` are accepted. Every other remote address — including connections from other machines on your local network — is dropped immediately.
+
+This means you do **not** need to pass any header, query parameter, or token when calling the API. If your request reaches the server, it is already authorized by virtue of running on your Mac.
+
+<Note>
+  The loopback restriction is the entire security boundary. Any process running as any user on your Mac can call the Local API. If you share your Mac with untrusted users or run untrusted software, keep this in mind — the API can read transcription history and modify your dictionary.
+</Note>
+
+## What you do not need to do
+
+- You do not need to pass an `Authorization` header.
+- You do not need an API key or secret.
+- You do not need to configure any allowlist or token in FluidVoice settings.
+
+A minimal valid request looks like this — no credentials:
+
+```bash
+curl http://localhost:47733/v1/health
+```
+
+## Do not expose the port externally
+
+<Warning>
+  Do not forward port 47733 (or your custom port) through a reverse proxy, SSH tunnel, or firewall rule that makes it reachable from outside your Mac. The API has no authentication layer. Any process that can reach the port can read your transcription history and overwrite your dictionary without restriction.
+</Warning>
+
+If you need to call the Local API from a remote machine, use an SSH local port forward instead of exposing the port directly:
+
+```bash
+# Forward the remote FluidVoice port to your local machine over SSH
+ssh -L 47733:127.0.0.1:47733 your-mac-hostname
+```
+
+This keeps the traffic inside an encrypted SSH session and preserves the loopback-only guarantee on the remote Mac.

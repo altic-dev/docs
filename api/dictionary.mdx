@@ -1,0 +1,285 @@
+---
+title: "Dictionary API: Manage Replacements and Custom Words"
+sidebarTitle: "Dictionary"
+description: "Read and write FluidVoice's text replacement rules and custom vocabulary words programmatically, without opening the app settings UI."
+---
+
+The Dictionary API gives you programmatic control over two features in FluidVoice: **text replacements** (trigger phrases that get substituted in your transcripts) and **custom words** (vocabulary hints that improve transcription accuracy for domain-specific terms). All four endpoints read from and write to the same data that FluidVoice uses live — changes take effect immediately.
+
+---
+
+## GET /v1/dictionary/replacements
+
+Returns all text replacement rules currently configured in FluidVoice.
+
+```
+GET /v1/dictionary/replacements
+```
+
+### Example
+
+```bash
+curl http://localhost:47733/v1/dictionary/replacements
+```
+
+```json
+{
+  "count": 2,
+  "items": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "replacement": "123 Main Street, Springfield, IL 62701",
+      "triggers": ["my address", "home address"]
+    },
+    {
+      "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "replacement": "FluidVoice",
+      "triggers": ["fluid voice", "fluidvoice"]
+    }
+  ]
+}
+```
+
+<ResponseField name="count" type="integer" required>
+  Total number of replacement rules in the list.
+</ResponseField>
+
+<ResponseField name="items" type="array" required>
+  Array of replacement rule objects.
+
+  <Expandable title="Item fields">
+    <ResponseField name="id" type="string" required>
+      A UUID that uniquely identifies this replacement rule. Include this when updating a specific entry.
+    </ResponseField>
+
+    <ResponseField name="triggers" type="array of strings" required>
+      One or more phrases that, when spoken, are replaced by `replacement` in the transcript.
+    </ResponseField>
+
+    <ResponseField name="replacement" type="string" required>
+      The text that replaces any matched trigger phrase.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+## POST /v1/dictionary/replacements
+
+Adds new replacement rules or replaces all existing rules. Returns the updated full list.
+
+```
+POST /v1/dictionary/replacements
+```
+
+### Write modes
+
+<ParamField body="mode" type="string">
+  How incoming entries are merged with existing data. One of:
+  - `"append"` *(default)* — adds new entries to the existing list. If an incoming entry has the same `id` or the same `replacement` (case-insensitive) as an existing one, the existing entry is updated in place.
+  - `"replace"` — discards all existing replacement rules and stores only the entries you provide.
+</ParamField>
+
+### Adding a single replacement
+
+<ParamField body="triggers" type="array of strings" required>
+  The trigger phrases for this single entry.
+</ParamField>
+
+<ParamField body="replacement" type="string" required>
+  The replacement text for this single entry.
+</ParamField>
+
+```bash
+curl http://localhost:47733/v1/dictionary/replacements \
+  -H "Content-Type: application/json" \
+  -d '{
+    "triggers": ["addr", "my address"],
+    "replacement": "123 Main Street, Springfield, IL 62701"
+  }'
+```
+
+### Adding multiple replacements
+
+<ParamField body="entries" type="array" required>
+  An array of replacement objects. Each object must include `triggers` and `replacement`. You may optionally include `id` to update a specific existing rule.
+</ParamField>
+
+```bash
+curl http://localhost:47733/v1/dictionary/replacements \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mode": "append",
+    "entries": [
+      {
+        "triggers": ["addr", "my address"],
+        "replacement": "123 Main Street, Springfield, IL 62701"
+      },
+      {
+        "triggers": ["fluid voice", "fluidvoice"],
+        "replacement": "FluidVoice"
+      }
+    ]
+  }'
+```
+
+### Replacing all rules
+
+```bash
+curl http://localhost:47733/v1/dictionary/replacements \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mode": "replace",
+    "entries": [
+      {
+        "triggers": ["my email"],
+        "replacement": "alex@example.com"
+      }
+    ]
+  }'
+```
+
+The response body is the same format as `GET /v1/dictionary/replacements`, reflecting the updated list.
+
+---
+
+## GET /v1/dictionary/custom-words
+
+Returns all custom vocabulary words currently configured in FluidVoice.
+
+```
+GET /v1/dictionary/custom-words
+```
+
+### Example
+
+```bash
+curl http://localhost:47733/v1/dictionary/custom-words
+```
+
+```json
+{
+  "count": 2,
+  "items": [
+    {
+      "aliases": ["fluid voice", "fluidvoice app"],
+      "text": "FluidVoice",
+      "weight": 1.5
+    },
+    {
+      "aliases": [],
+      "text": "kubernetes",
+      "weight": 1.0
+    }
+  ]
+}
+```
+
+<ResponseField name="count" type="integer" required>
+  Total number of custom words in the list.
+</ResponseField>
+
+<ResponseField name="items" type="array" required>
+  Array of custom word objects.
+
+  <Expandable title="Item fields">
+    <ResponseField name="text" type="string" required>
+      The canonical form of the word or phrase as you want it to appear in transcripts.
+    </ResponseField>
+
+    <ResponseField name="weight" type="number | null" required>
+      A boost weight that increases the likelihood the model will recognize this word. Higher values increase recognition probability. `null` uses the model's default weighting.
+    </ResponseField>
+
+    <ResponseField name="aliases" type="array of strings" required>
+      Alternative phonetic spellings or spoken forms of the word (e.g. `["fluid voice", "fluidvoice app"]`). Helps the model recognize the word when it is pronounced in different ways.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+## POST /v1/dictionary/custom-words
+
+Adds new custom words or replaces all existing custom words. Returns the updated full list.
+
+```
+POST /v1/dictionary/custom-words
+```
+
+### Write modes
+
+<ParamField body="mode" type="string">
+  How incoming entries are merged with existing data. One of:
+  - `"append"` *(default)* — adds new words to the existing list. If an incoming word has the same `text` (case-insensitive) as an existing one, the existing entry is updated in place.
+  - `"replace"` — discards all existing custom words and stores only the entries you provide.
+</ParamField>
+
+### Adding a single custom word
+
+<ParamField body="text" type="string" required>
+  The canonical form of the word.
+</ParamField>
+
+<ParamField body="weight" type="number">
+  Recognition boost weight. Omit to use the model default.
+</ParamField>
+
+<ParamField body="aliases" type="array of strings">
+  Alternative phonetic forms. Omit or pass an empty array if not needed.
+</ParamField>
+
+```bash
+curl http://localhost:47733/v1/dictionary/custom-words \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "FluidVoice",
+    "weight": 1.5,
+    "aliases": ["fluid voice", "fluidvoice app"]
+  }'
+```
+
+### Adding multiple custom words
+
+```bash
+curl http://localhost:47733/v1/dictionary/custom-words \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mode": "append",
+    "entries": [
+      {
+        "text": "FluidVoice",
+        "weight": 1.5,
+        "aliases": ["fluid voice"]
+      },
+      {
+        "text": "kubernetes",
+        "weight": 1.0,
+        "aliases": ["kube", "k8s"]
+      }
+    ]
+  }'
+```
+
+### Replacing all custom words
+
+```bash
+curl http://localhost:47733/v1/dictionary/custom-words \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mode": "replace",
+    "entries": [
+      {
+        "text": "gRPC",
+        "weight": 1.2,
+        "aliases": ["grpc", "g-r-p-c"]
+      }
+    ]
+  }'
+```
+
+The response body is the same format as `GET /v1/dictionary/custom-words`, reflecting the updated list.
+
+<Note>
+  Custom words apply primarily to Parakeet models (Parakeet Flash, Parakeet TDT v3, and Parakeet TDT v2). Other speech models such as Apple Speech, Whisper, Nemotron, and Cohere Transcribe do not use the custom vocabulary boost terms from this API.
+</Note>

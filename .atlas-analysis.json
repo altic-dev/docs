@@ -1,27 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Altic",
+  "projectType": "saas",
+  "projectName": "FluidVoice",
+  "projectDescription": "FluidVoice is a free, open-source macOS dictation app that uses on-device speech models and the optional Fluid-1 AI model to transcribe, format, and post-process voice input into any app — with zero data leaving your Mac.",
   "theme": "almond",
-  "logo": {
-    "light": "https://media.brand.dev/d8a69291-d9f0-4975-8ce8-5da1d560cd77.svg",
-    "dark": "https://media.brand.dev/ad888a68-e307-4719-8ce4-6b5cb51c0c31.png"
-  },
-  "favicon": "https://icons.duckduckgo.com/ip3/altic.dev.ico",
-  "colors": {
-    "primary": "#888889",
-    "light": "#dbdcde"
-  },
-  "font": {
-    "headings": {
-      "family": "Space Grotesk"
-    }
-  },
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/altic-dev/FluidVoice"
-    }
-  },
+  "primaryColor": "#888889",
+  "lightColor": "#dbdcde",
+  "darkColor": null,
   "navigation": {
     "tabs": [
       {
@@ -94,5 +78,31 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "On-device speech-to-text with multiple model options (Nemotron, Parakeet, Whisper, Apple Speech)",
+    "Fluid Intelligence — local AI model for smart formatting, capitalization, and post-processing",
+    "Command Mode — control macOS by voice (launch apps, run shortcuts, automate workflows)",
+    "Write/Edit Mode — dictate or rewrite text in any text field across any app",
+    "Per-app prompt profiles — adaptive tone and formatting per application",
+    "System-wide global hotkey for instant voice capture from anywhere",
+    "AI post-processing via OpenAI, Groq, custom providers, or fully local Fluid-1",
+    "Custom dictionary — text replacements and vocabulary boost terms",
+    "Local REST API for scripting and third-party integrations",
+    "Audio history with budget controls and ZIP export",
+    "Notch-aware overlay with configurable sizes",
+    "40+ language support across models",
+    "Auto-updates with optional beta channel",
+    "Free and open source under GPLv3"
+  ],
+  "publicApiSurface": [
+    "GET /v1/health",
+    "GET /v1/history",
+    "POST /v1/transcribe",
+    "POST /v1/postprocess",
+    "GET /v1/dictionary/replacements",
+    "POST /v1/dictionary/replacements",
+    "GET /v1/dictionary/custom-words",
+    "POST /v1/dictionary/custom-words"
+  ]
 }

@@ -1,0 +1,69 @@
+---
+title: "FluidVoice Local API: Automate Transcription Locally"
+sidebarTitle: "Overview"
+description: "A loopback HTTP server built into FluidVoice that lets scripts, apps, and automation tools transcribe audio, retrieve history, and manage your dictionary."
+---
+
+FluidVoice exposes a local HTTP server on your Mac that you can call from shell scripts, Raycast extensions, Automator actions, or any other tool that can make HTTP requests. The server listens exclusively on the loopback interface, so only processes running on your Mac can reach it — no authentication token is required, and no traffic ever leaves your machine.
+
+## Enabling the Local API
+
+The Local API is off by default. To turn it on:
+
+1. Open **FluidVoice Settings**.
+2. Go to **Advanced → Local API**.
+3. Toggle **Enable Local API** on.
+
+The server starts immediately and begins listening on the default port. You can optionally enter a custom port number in the same panel if 47733 conflicts with another service on your machine.
+
+## Base URL and default port
+
+```
+http://localhost:47733
+```
+
+The default port is **47733**. If you change the port in settings, replace `47733` in every example with your chosen port.
+
+## Request and response format
+
+All endpoints accept and return JSON unless otherwise noted. Every response sets `Content-Type: application/json; charset=utf-8`. Dates are formatted as ISO 8601 strings (e.g. `2025-01-15T09:41:00Z`). The maximum request body size is **25 MB** — requests larger than this are rejected with HTTP 413.
+
+## Quick start
+
+Check that FluidVoice is running and get the current app version:
+
+```bash
+curl http://localhost:47733/v1/health
+```
+
+```json
+{
+  "status": "ok",
+  "version": "1.6.0"
+}
+```
+
+## Security model
+
+The server only accepts connections from `127.0.0.1`, `::1`, or `localhost`. Any connection from a non-loopback address is dropped immediately. See [Security](/api/authentication) for details.
+
+## Available endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/health` | Check that FluidVoice is running and retrieve the app version. |
+| `POST` | `/v1/transcribe` | Transcribe an audio file or raw audio bytes using the currently selected speech model. |
+| `POST` | `/v1/postprocess` | Run AI post-processing on a text string using the configured AI provider. |
+| `GET` | `/v1/history` | Retrieve recent transcription history entries. |
+| `GET` | `/v1/dictionary/replacements` | List all text replacement rules. |
+| `POST` | `/v1/dictionary/replacements` | Add or replace text replacement rules. |
+| `GET` | `/v1/dictionary/custom-words` | List custom vocabulary words used to boost transcription accuracy. |
+| `POST` | `/v1/dictionary/custom-words` | Add or replace custom vocabulary words. |
+
+## Common use cases
+
+- **Shell scripts** — pipe audio files through FluidVoice from the terminal or a cron job.
+- **Raycast extensions** — trigger transcription or retrieve history without opening the app UI.
+- **Automator actions** — chain FluidVoice transcription into macOS workflows.
+- **Third-party integrations** — connect any tool that can send HTTP requests to a local server.
+- **Text pipelines** — transcribe audio in one step and call `/v1/postprocess` separately to polish the output on demand.

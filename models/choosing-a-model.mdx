@@ -1,0 +1,107 @@
+---
+title: "How to Choose the Right Speech Model"
+sidebarTitle: "Choosing a Model"
+description: "Work through five quick questions about your Mac, language, latency, and disk space to find the speech model that fits your workflow best."
+---
+
+With eight model families available, picking the right one for your setup comes down to a few straightforward questions: what hardware you have, which language you speak, how fast you need transcription to feel, and how much disk space you can spare. Work through the decision factors below, check the quick-pick table, and you'll have a model downloaded in minutes.
+
+<Tip>
+  You can try as many models as you like and switch between them at any time — open **Settings → Voice Engine → Change Model** whenever you want to experiment with a different option.
+</Tip>
+
+---
+
+## Decision factors
+
+### 1. Hardware
+
+Your Mac's chip is the first filter.
+
+- **Apple Silicon (M1 or later):** All models are available to you — Nemotron Speech 3.5, Parakeet Flash, Parakeet TDT v3 and v2, Cohere Transcribe, Apple Speech, and the full Whisper family.
+- **Intel Mac:** Only **Apple Speech** and the **Whisper** family are supported. Start with Whisper Small for a good balance of speed and accuracy, or use Apple Speech for zero-download convenience.
+
+### 2. Language
+
+- **English only:** Any model works. For the lowest latency, choose **Parakeet Flash (Beta)** or **Parakeet TDT v2**. For accuracy, choose **Cohere Transcribe**.
+- **European language (non-English):** **Parakeet TDT v3** covers 25 European languages with a good speed-accuracy balance. **Nemotron Speech 3.5** covers ~40 languages and adds streaming capability.
+- **East Asian, Arabic, or other languages:** **Cohere Transcribe** covers Mandarin, Japanese, Korean, Vietnamese, and Arabic. **Whisper** (Medium or Large) covers up to 99 languages and is the most comprehensive option.
+- **Widest possible coverage:** **Whisper Large** covers 99 languages at the highest accuracy of the Whisper family.
+
+### 3. Latency
+
+- **Lowest latency:** **Parakeet Flash (Beta)** — text appears on screen with near-zero delay. **Nemotron Speech 3.5 Ultra Fast Low Latency** delivers a similar real-time feel across ~40 languages.
+- **Highest accuracy:** **Cohere Transcribe** or **Nemotron 3.5 Multilingual** — both trade a little speed for cleaner transcripts.
+- **Balanced:** **Parakeet TDT v3** is FluidVoice's recommended default and a strong all-rounder.
+
+### 4. Disk space
+
+- **Tight on space:** **Apple Speech** is built into macOS and uses no extra disk space at all. **Parakeet Flash** is the smallest download at ~250 MB.
+- **Moderate space available:** Parakeet TDT v3 (~500 MB) and Nemotron 3.5 Multilingual (~530 MB) offer strong results for their size.
+- **Space is not a concern:** **Cohere Transcribe** (~1.4 GB) and **Whisper Large** (~2.9 GB) give you the highest accuracy the lineup offers.
+
+### 5. Offline use
+
+Every local model in FluidVoice runs entirely on-device — no internet connection is needed once the model is downloaded. **Apple Speech** also works offline after your macOS system language has been set up. None of your audio or transcribed text is sent to the cloud during dictation.
+
+---
+
+## Quick-pick table
+
+Use this table to jump straight to a recommendation based on your primary need.
+
+| I want… | Recommended model |
+|---|---|
+| The fastest English dictation | **Parakeet Flash (Beta)** |
+| Fast English dictation (stable release) | **Parakeet TDT v2** |
+| A non-English European language | **Nemotron Speech 3.5** or **Parakeet TDT v3** |
+| East Asian or Arabic language support | **Cohere Transcribe** |
+| The widest language support | **Whisper Large** |
+| Maximum accuracy | **Cohere Transcribe** |
+| Zero download, works immediately | **Apple Speech** |
+| Intel Mac support | **Whisper** or **Apple Speech** |
+| Streaming speed across many languages | **Nemotron Speech 3.5 Ultra Fast** |
+
+---
+
+## Recommended starting points
+
+<CardGroup cols={2}>
+  <Card title="New to FluidVoice, Apple Silicon" icon="bolt">
+    Start with **Parakeet TDT v3**. It covers 25 languages, downloads in under a minute, and gives you a fast, accurate baseline to compare against.
+  </Card>
+  <Card title="English-only power user" icon="gauge-high">
+    Choose **Parakeet Flash (Beta)**. It is the fastest model available and delivers near-zero perceived latency for English dictation.
+  </Card>
+  <Card title="Multilingual or non-European language" icon="language">
+    Try **Nemotron Speech 3.5 Multilingual** for ~40 languages with high accuracy, or **Cohere Transcribe** if you need Mandarin, Japanese, Korean, Vietnamese, or Arabic.
+  </Card>
+  <Card title="Intel Mac" icon="microchip">
+    Use **Apple Speech** for a zero-download start, or download **Whisper Small** (~466 MB) for broader language support and strong accuracy.
+  </Card>
+  <Card title="Tight on disk space" icon="hard-drive">
+    **Apple Speech** is built-in and free. If you want a dedicated model, **Parakeet Flash** at ~250 MB is the smallest standalone download.
+  </Card>
+  <Card title="Best accuracy, cost no object" icon="star">
+    Download **Cohere Transcribe** (~1.4 GB) for the highest-accuracy multilingual transcription in the lineup.
+  </Card>
+</CardGroup>
+
+---
+
+## How to switch models
+
+<Steps>
+  <Step title="Open Settings">
+    Click the FluidVoice menu bar icon and select **Settings**, or use your configured keyboard shortcut to open the app.
+  </Step>
+  <Step title="Go to Voice Engine">
+    Select **Voice Engine** in the sidebar.
+  </Step>
+  <Step title="Change Model">
+    Click **Change Model** to see the full list of available models with their download sizes and language details.
+  </Step>
+  <Step title="Select and download">
+    Choose the model you want. If it is not already on your Mac, click **Download** and wait for it to finish — FluidVoice switches to the new model automatically once the download completes.
+  </Step>
+</Steps>

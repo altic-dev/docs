@@ -1,0 +1,119 @@
+---
+title: "POST /v1/transcribe — Transcribe Audio Files"
+sidebarTitle: "POST /v1/transcribe"
+description: "Submit an audio file by path, base64 string, or raw bytes and get back a text transcript from whichever speech model is active in FluidVoice."
+---
+
+The transcribe endpoint runs speech recognition on audio you provide and returns the resulting transcript along with a confidence score and sample count. FluidVoice uses whichever speech model you have selected in **Settings → Speech Model** — you do not need to specify the model in your request.
+
+The endpoint accepts three input modes. Choose whichever is most convenient for your use case.
+
+## Request
+
+```
+POST /v1/transcribe
+```
+
+Maximum request body size: **25 MB**.
+
+---
+
+### Mode A — File path (JSON body)
+
+Send a JSON object with the absolute path to an audio file already on disk. FluidVoice reads the file directly — no file upload required.
+
+```bash
+curl http://localhost:47733/v1/transcribe \
+  -H "Content-Type: application/json" \
+  -d '{"path": "/Users/alex/Recordings/standup-notes.wav"}'
+```
+
+<ParamField body="path" type="string" required>
+  Absolute path to an audio file on disk. The file must be readable by FluidVoice. Supports any audio format that macOS AVFoundation can decode (WAV, M4A, AIFF, MP3, CAF, and others).
+</ParamField>
+
+---
+
+### Mode B — Base64-encoded audio (JSON body)
+
+Send a JSON object containing the audio data encoded as a base64 string. Include `filename` so FluidVoice can detect the audio format from the file extension.
+
+```bash
+curl http://localhost:47733/v1/transcribe \
+  -H "Content-Type: application/json" \
+  -d '{
+    "audioBase64": "UklGRiQAAABXQVZFZm10IBAAAA...",
+    "filename": "recording.wav"
+  }'
+```
+
+<ParamField body="audioBase64" type="string" required>
+  The raw audio file contents encoded as a standard base64 string. The decoded data must be a valid audio file in a format supported by macOS.
+</ParamField>
+
+<ParamField body="filename" type="string">
+  A filename (e.g. `"recording.m4a"`) used to detect the audio format from the file extension. Defaults to `"audio.wav"` if omitted. Does not need to be a real file path — only the extension matters.
+</ParamField>
+
+---
+
+### Mode C — Raw audio bytes (binary body)
+
+Send the raw audio file bytes as the request body. Set `Content-Type` to the appropriate audio MIME type and use the `X-Filename` header to help FluidVoice identify the format.
+
+```bash
+curl http://localhost:47733/v1/transcribe \
+  -H "Content-Type: audio/wav" \
+  -H "X-Filename: recording.wav" \
+  --data-binary @/Users/alex/Recordings/standup-notes.wav
+```
+
+<ParamField header="Content-Type" type="string">
+  The MIME type of the audio data, e.g. `audio/wav`, `audio/mp4`, `audio/aiff`. FluidVoice uses this as a hint but primarily relies on the file extension from `X-Filename`.
+</ParamField>
+
+<ParamField header="X-Filename" type="string">
+  A filename whose extension indicates the audio format (e.g. `"recording.wav"`, `"memo.m4a"`). Defaults to `"audio.wav"` if not provided.
+</ParamField>
+
+---
+
+## Response
+
+```json
+{
+  "confidence": 0.97,
+  "provider": "Parakeet Flash",
+  "sampleCount": 176400,
+  "text": "The deployment is scheduled for Friday at nine AM Pacific."
+}
+```
+
+<ResponseField name="text" type="string" required>
+  The transcribed text produced by the speech model.
+</ResponseField>
+
+<ResponseField name="confidence" type="number" required>
+  A confidence score between `0.0` and `1.0` indicating how certain the model is about the transcript. Higher is more confident.
+</ResponseField>
+
+<ResponseField name="sampleCount" type="integer" required>
+  The number of audio samples processed. Divide by the sample rate (typically 16000 for most models) to get the audio duration in seconds.
+</ResponseField>
+
+<ResponseField name="provider" type="string" required>
+  The display name of the speech model that produced the transcript, matching the model selected in FluidVoice settings (e.g. `"Parakeet Flash"`, `"Nemotron Speech 3.5"`, `"Apple Speech"`).
+</ResponseField>
+
+## Error responses
+
+| Status | Body | Meaning |
+|--------|------|---------|
+| `400` | `{"error": "Missing audio path or audioBase64."}` | The JSON body did not contain a valid `path` or `audioBase64` field. |
+| `400` | `{"error": "Missing audio body."}` | A binary request was sent with an empty body. |
+| `400` | `{"error": "Invalid JSON audio payload."}` | The request body could not be parsed as JSON. |
+| `413` | `{"error": "Request too large."}` | The request body exceeds 25 MB. |
+
+<Note>
+  The transcription model used is always the one currently active in FluidVoice. If you need to use a specific model, change it in **Settings → Speech Model** before calling the endpoint.
+</Note>

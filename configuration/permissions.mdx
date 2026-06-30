@@ -1,0 +1,91 @@
+---
+title: "Required macOS Permissions for FluidVoice"
+sidebarTitle: "Permissions"
+description: "Grant FluidVoice microphone and accessibility access so it can capture your voice and type transcribed text into any app on your Mac."
+---
+
+FluidVoice needs two macOS permissions to work: **Microphone** access to capture your voice, and **Accessibility** access to type transcribed text into other apps. Without both permissions, dictation either can't start or can't deliver text where you need it. FluidVoice walks you through granting both during onboarding, but you can also grant or revoke them at any time through System Settings.
+
+## Microphone Access
+
+### Why it's needed
+
+FluidVoice records audio from your microphone and passes it to the on-device speech recognition model. Without microphone access, the app cannot hear you, and pressing your hotkey does nothing.
+
+### How to grant microphone access
+
+<Steps>
+  <Step title="Open System Settings">
+    Click the Apple menu () → **System Settings**.
+  </Step>
+  <Step title="Navigate to Privacy & Security">
+    Select **Privacy & Security** in the sidebar.
+  </Step>
+  <Step title="Open Microphone">
+    Click **Microphone** in the list of permission categories.
+  </Step>
+  <Step title="Enable FluidVoice">
+    Toggle **FluidVoice** on.
+  </Step>
+</Steps>
+
+### What happens without it
+
+If FluidVoice doesn't have microphone access, pressing your hotkey produces no result. The app cannot record audio, so no transcription occurs. Check **System Settings → Privacy & Security → Microphone** if your hotkey appears to do nothing.
+
+---
+
+## Accessibility Access
+
+### Why it's needed
+
+FluidVoice uses macOS Accessibility APIs to type transcribed text directly into any focused text field—whether that's a chat window, a code editor, a terminal, or a document. This is what makes system-wide dictation possible without clipboard interference.
+
+<Warning>
+  Without Accessibility permission, FluidVoice can transcribe your speech but **cannot type the resulting text into other apps**. You will see transcription in the overlay, but nothing will be inserted into the app you're using.
+</Warning>
+
+### How to grant accessibility access
+
+<Steps>
+  <Step title="Open System Settings">
+    Click the Apple menu () → **System Settings**.
+  </Step>
+  <Step title="Navigate to Privacy & Security">
+    Select **Privacy & Security** in the sidebar.
+  </Step>
+  <Step title="Open Accessibility">
+    Click **Accessibility** in the list of permission categories.
+  </Step>
+  <Step title="Enable FluidVoice">
+    Toggle **FluidVoice** on. macOS may prompt you to unlock this section with your password or Touch ID.
+  </Step>
+</Steps>
+
+### What happens without it
+
+Without Accessibility permission, FluidVoice can still run and transcribe audio, but it cannot insert text into other apps. Command Mode and Write Mode both require this permission to function.
+
+<Note>
+  **Command Mode** and **Write Mode** specifically depend on Accessibility permission to send actions and text to other apps. If either mode isn't working, verify this permission is enabled.
+</Note>
+
+---
+
+## Guided Onboarding
+
+When you first launch FluidVoice, the onboarding flow requests both permissions with step-by-step instructions. Follow the prompts and grant access when macOS asks. If you skip a permission during onboarding, you can always return to **System Settings → Privacy & Security** to enable it later.
+
+## Checking Your Current Permission Status
+
+To verify which permissions FluidVoice currently has:
+
+1. Open **System Settings → Privacy & Security**.
+2. Check **Microphone** — FluidVoice should appear with its toggle enabled.
+3. Check **Accessibility** — FluidVoice should appear with its toggle enabled.
+
+If either toggle is off, enable it and relaunch FluidVoice.
+
+## Revoking Permissions
+
+To revoke a permission, return to **System Settings → Privacy & Security**, find the relevant category, and toggle FluidVoice off. FluidVoice will stop using that permission immediately. You can re-enable it at any time.

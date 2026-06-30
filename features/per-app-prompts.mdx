@@ -85,14 +85,14 @@ Every prompt profile targets one of two modes:
 
 Each mode has a **routing scope** setting that controls how broadly per-app profiles apply:
 
-- **All apps** — the selected prompt profile is used as the global default for all apps, with per-app bindings overriding it for specific apps.
-- **Selected apps only** — the selected prompt profile is only active for apps that have an explicit binding. All other apps use the built-in default prompt.
+- **All apps** — the selected prompt profile acts as the global default for every app. Per-app bindings override it for specific apps you've configured.
+- **Selected apps only** — per-app profiles are only active for apps that have an explicit binding. All other apps fall back to the built-in default prompt, ignoring any globally selected profile.
 
 Set the routing scope in **Settings → Prompts** for each mode independently.
 
 ## How App Detection Works
 
-FluidVoice uses macOS's accessibility API to monitor which application is currently focused. When you press your dictation hotkey, FluidVoice reads the active app's bundle identifier and looks up any matching prompt binding for the current mode. The matching profile's instructions are sent to the AI provider as part of the system prompt — no manual selection required on your part.
+FluidVoice uses macOS's accessibility API to monitor which application is currently focused. When you press your dictation hotkey, FluidVoice reads the active app and looks up any matching prompt binding for the current mode. The matching profile's instructions are sent to the AI provider as part of the system prompt — no manual selection required on your part.
 
 Detection is automatic and real-time. Switching apps between dictation sessions is enough for the correct profile to activate on your next dictation.
 

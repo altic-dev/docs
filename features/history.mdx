@@ -19,10 +19,10 @@ Every dictation session produces a history entry containing:
 | **Timestamp** | Date and time the dictation occurred |
 | **App name** | The app that was in focus when you dictated |
 | **Raw text** | The original transcript from the speech model, before any AI processing |
-| **Final text** | The post-processed result that was typed into the app |
+| **Processed text** | The post-processed result that was typed into the app |
 | **AI processed** | Whether an AI enhancement provider was applied |
 
-Having both the raw and final text in the same entry makes it easy to see what the speech model heard versus what the AI changed, which is useful for tuning your prompts and spotting persistent transcription errors.
+Having both the raw and processed text in the same entry makes it easy to see what the speech model heard versus what the AI changed, which is useful for tuning your prompts and spotting persistent transcription errors.
 
 ### How to Access History
 
@@ -31,25 +31,42 @@ Open history from either of these locations:
 - **Menu bar icon → History**
 - **Settings → History**
 
-The history view shows your recent dictations in reverse chronological order. Select any entry to expand it and see the full raw and final text side by side.
+The history view shows your recent dictations in reverse chronological order. Select any entry to expand it and see the full raw and processed text side by side.
 
 ### Clearing History
 
 To remove all history entries, go to **Settings → History** and click **Clear All**. Individual entries can also be deleted from the history view.
 
-### API Access for Developers
+### Local API Access
 
 The local REST API exposes history for external tools and scripts:
 
 ```bash
-# Get the last 20 history entries (default limit)
+# Get the last 100 history entries (default limit)
 curl http://localhost:11111/v1/history
 
 # Get the last 50 entries
 curl http://localhost:11111/v1/history?limit=50
+
+# Get up to 1000 entries (maximum)
+curl http://localhost:11111/v1/history?limit=1000
 ```
 
-Each response item includes `id`, `timestamp`, `originalText`, `finalText`, `appName`, `characterCount`, and `wasAIProcessed`.
+Each response item includes the following fields:
+
+| Field | Description |
+|---|---|
+| `id` | Unique identifier for the history entry |
+| `timestamp` | ISO 8601 date and time of the dictation |
+| `rawText` | Original transcript from the speech model |
+| `processedText` | AI-polished text that was typed into the app |
+| `appName` | Name of the app that was in focus |
+| `windowTitle` | Title of the focused window at the time of dictation |
+| `characterCount` | Number of characters in the final output |
+| `wasAIProcessed` | Whether an AI enhancement provider was applied |
+| `aiProcessingError` | Error message if AI processing failed, otherwise null |
+
+The default limit is **100 entries**. The maximum is **1,000 entries**.
 
 ---
 

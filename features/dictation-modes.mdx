@@ -36,7 +36,7 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
   </Tab>
 
   <Tab title="Write Mode">
-    ## Write Mode (Edit Mode)
+    ## Write Mode
 
     Write Mode sends your dictation through an AI model before it reaches the active app. The AI cleans up filler words, fixes capitalization and punctuation, converts spoken numbers and dates to their correct format, and adapts the tone to the context. The result reads like polished writing rather than raw speech.
 
@@ -78,7 +78,7 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
   <Tab title="Command Mode">
     ## Command Mode
 
-    Command Mode turns your voice into a macOS automation agent. Speak a natural-language instruction and FluidVoice — powered by a language model — figures out what to do, runs the necessary terminal commands, verifies the result, and reports back. You can launch apps, run Shortcuts, manipulate files, create reminders, send messages, and automate workflows, all without touching the keyboard.
+    Command Mode turns your voice into a macOS automation agent. Speak a natural-language instruction and FluidVoice — powered by a language model — figures out what to do, runs the necessary system actions, verifies the result, and reports back. You can launch apps, run Shortcuts, manipulate files, create reminders, send messages, and automate workflows, all without touching the keyboard.
 
     Command Mode runs an agentic loop: it checks prerequisites before acting, executes the command, verifies the outcome, and retries or explains if something goes wrong.
 
@@ -115,7 +115,7 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
     Enable Command Mode in **Settings → Command Mode**, assign a hotkey (default: **Right ⌘**), and press it to begin a session. Speak your instruction and wait for FluidVoice to complete the task.
 
     <Warning>
-      Command Mode can execute terminal commands on your Mac. Destructive operations (deleting files, moving items, running `sudo`) show a confirmation prompt before executing. Keep **Confirm before execute** enabled in **Settings → Command Mode** unless you have a specific reason to disable it.
+      Command Mode can execute system commands on your Mac. Destructive operations (deleting files, moving items, running privileged commands) show a confirmation prompt before executing. Keep **Confirm before execute** enabled in **Settings → Command Mode** unless you have a specific reason to disable it.
     </Warning>
   </Tab>
 </Tabs>
@@ -137,13 +137,13 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
 ## Mode Comparison
 
 <CardGroup cols={3}>
-  <Card title="Direct Dictation" icon="bolt">
+  <Card title="Direct Dictation" icon="bolt" href="/features/dictation-modes">
     Raw speech-to-text. No AI, no rewriting. Maximum speed, full control over output. Best for code, chat, quick notes.
   </Card>
-  <Card title="Write Mode" icon="wand-magic-sparkles">
+  <Card title="Write Mode" icon="wand-magic-sparkles" href="/features/dictation-modes">
     AI-polished dictation. Cleans filler words, fixes grammar, adapts tone. Also rewrites selected text on command.
   </Card>
-  <Card title="Command Mode" icon="terminal">
+  <Card title="Command Mode" icon="terminal" href="/features/dictation-modes">
     Voice-driven Mac automation. Launches apps, runs Shortcuts, manages files, creates reminders — all from natural speech.
   </Card>
 </CardGroup>

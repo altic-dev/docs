@@ -12,7 +12,7 @@ The Dictionary API gives you programmatic control over two features in FluidVoic
 
 Returns all text replacement rules currently configured in FluidVoice.
 
-```
+```http
 GET /v1/dictionary/replacements
 ```
 
@@ -68,7 +68,7 @@ curl http://localhost:47733/v1/dictionary/replacements
 
 Adds new replacement rules or replaces all existing rules. Returns the updated full list.
 
-```
+```http
 POST /v1/dictionary/replacements
 ```
 
@@ -147,7 +147,7 @@ The response body is the same format as `GET /v1/dictionary/replacements`, refle
 
 Returns all custom vocabulary words currently configured in FluidVoice.
 
-```
+```http
 GET /v1/dictionary/custom-words
 ```
 
@@ -203,7 +203,7 @@ curl http://localhost:47733/v1/dictionary/custom-words
 
 Adds new custom words or replaces all existing custom words. Returns the updated full list.
 
-```
+```http
 POST /v1/dictionary/custom-words
 ```
 

@@ -8,9 +8,10 @@ This guide walks you through everything you need to do to start dictating with F
 
 <Steps>
   <Step title="Install FluidVoice">
-    Install FluidVoice using Homebrew (recommended) or by downloading the latest release from GitHub.
+    Install FluidVoice using Homebrew, by downloading the latest release from [GitHub](https://github.com/altic-dev/FluidVoice), or from [FluidVoice webpage](https://altic.dev/fluid)
 
     <CodeGroup>
+
     ```bash Homebrew
     brew install --cask fluidvoice
     ```
@@ -19,15 +20,15 @@ This guide walks you through everything you need to do to start dictating with F
     # Download the latest .dmg from GitHub Releases
     open https://github.com/altic-dev/FluidVoice/releases/latest
     ```
+
     </CodeGroup>
 
     After installation, open FluidVoice from your Applications folder. The onboarding wizard starts automatically on first launch.
 
     <Note>
-      FluidVoice requires macOS 15.0 Sequoia or later and an Apple Silicon Mac for most models. Intel Macs are supported via Whisper models (version 1.5.1+).
+      FluidVoice requires macOS 15.0 Sequoia or later and an Apple Silicon Mac for most models. Intel Macs are supported via Whisper models (version 1.5.1\+).
     </Note>
   </Step>
-
   <Step title="Grant permissions">
     FluidVoice needs two permissions to work. macOS will prompt you for both during onboarding.
 
@@ -39,20 +40,18 @@ This guide walks you through everything you need to do to start dictating with F
       If you deny the accessibility permission, dictation will work but text will not be inserted into other apps. You can re-enable it at any time in System Settings.
     </Warning>
   </Step>
-
   <Step title="Set your global hotkey">
-    A global hotkey lets you trigger dictation from any app without switching to FluidVoice. Open **Settings** and choose a hotkey combination that doesn't conflict with your existing shortcuts.
+    A global hotkey lets you trigger the dictation tool from any app without switching to FluidVoice. By default,**⌥ Option** key is set for trigger.** **For a custom key**,** open **Settings → Global Hotkey → Primary Dictation Shortcuts.**
 
-    A common choice is **⌥ Option** (held) or a double-tap of a function key, but you can assign any key combination you prefer. The hotkey is active system-wide the moment you save it.
+    You can also personalize how you start and stop the recording: either by holding down the key (Hold mode), or a double-tap to start and stop recording (Toggle mode), or Auto mode. For this, go to **Settings → Global Hotkey → Activation Mode**.
   </Step>
-
   <Step title="Choose a speech model">
-    During onboarding, FluidVoice asks you to select a speech model. Each model offers a different balance of language support, latency, and download size.
+    During onboarding, FluidVoice recommends you a speech model based on your language preferences. FluidVoice also offers you the option to pick a model of your choosing from our range of supported [models](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/64d3f7e5-8794-421b-8d0d-4fb3cbbca497). Each model offers a different balance of language support, latency, accuracy, and download size. You can either pick what FluidVoice recommends, or pick a model of your choosing.
 
     | Model | Best for | Languages | Size |
-    |---|---|---|---|
-    | Nemotron Speech 3.5 Ultra | Streaming multilingual | ~40 | ~670 MB |
-    | Nemotron 3.5 Multilingual | Higher-accuracy multilingual | ~40 | ~530 MB |
+    | --- | --- | --- | --- |
+    | Nemotron Speech 3.5 - <br />Ultra fast low latency | Low latency with <br />streaming multilingual | ~40 | ~670 MB |
+    | Nemotron 3.5 Multilingual | Lower latency, <br />Higher-accuracy multilingual | ~40 | ~530 MB |
     | Parakeet Flash (Beta) | Lowest-latency English | English | ~250 MB |
     | Parakeet TDT v3 | Fast multilingual default | 25 | ~500 MB |
     | Parakeet TDT v2 | Fast English-only | English | ~500 MB |
@@ -60,39 +59,36 @@ This guide walks you through everything you need to do to start dictating with F
     | Apple Speech | Zero-download, built-in | System languages | Built-in |
     | Whisper (Tiny–Large) | Broad compatibility, Intel | Up to 99 | ~75 MB–2.9 GB |
 
-    If you're unsure, start with **Apple Speech** (no download required) or **Parakeet TDT v3** for a fast multilingual experience on Apple Silicon. You can switch models at any time in Settings.
+    If you're unsure, start with **Apple Speech** (no download required) or **Parakeet TDT v2 **for English, or **Parakeet TDT v3** for a fast multilingual experience on Apple Silicon. You can switch models at any time by going to the **Voice Engine** page.
 
     <Tip>
       If you're on an Intel Mac, select a **Whisper** model. It's the only family that supports Intel hardware.
     </Tip>
   </Step>
-
   <Step title="(Optional) Enable Fluid Intelligence">
     Fluid Intelligence is a local AI layer that polishes your dictation after transcription — smart formatting, context-aware capitalization, adaptive tone per app, and handling of dates, names, and numbers. Everything runs on your Mac; no data leaves your machine.
 
     To enable it, click **Enable Fluid Intelligence** during onboarding, or go to **Settings → Fluid Intelligence** after setup. The Fluid-1 model download is approximately **3.5 GB**.
 
     <Info>
-      Fluid Intelligence is completely optional. FluidVoice is fully functional without it. Enable it when you want on-device AI polish without any cloud dependency.
+      Fluid Intelligence is completely optional. FluidVoice is fully functional without it. Enable it when you want on-device AI polish without any cloud dependency. Fluid Intelligence causes a very minimal delay in output, so FluidVoice gives you the option to toggle it on or off through the overlay itself.
     </Info>
   </Step>
-
   <Step title="(Optional) Add a cloud AI provider">
-    If you prefer cloud-based post-processing, you can connect an AI provider for text enhancement. FluidVoice supports **OpenAI**, **Groq**, and **custom providers** (any OpenAI-compatible API endpoint).
+    If you prefer cloud-based post-processing, you can also connect an AI provider for text enhancement. FluidVoice supports **OpenAI**, **Groq**, and **custom providers** (any OpenAI-compatible API endpoint). You can find more details on the [AI Enhancement](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/8d613e06-4bba-4171-b81a-39e9fd030239) page.
 
-    Go to **Settings → AI Enhancement** and enter your API key. Keys are stored securely in the macOS Keychain — not in the app, not in any log file. When macOS prompts for Keychain access, select **Always Allow** so FluidVoice can retrieve the key without interrupting your dictation flow.
+    Go to **AI Enhancement** **→ AI Providers** and enter your API key. Keys are stored securely in the macOS Keychain — not in the app, not in any log file. When macOS prompts for Keychain access, select **Always Allow** so FluidVoice can retrieve the key without interrupting your dictation flow.
 
     <Note>
       Cloud AI enhancement is opt-in. No text is sent to any external service unless you add a provider and enable enhancement.
     </Note>
   </Step>
-
   <Step title="Start dictating">
-    Press your hotkey, speak naturally, and release. FluidVoice captures your voice, runs it through the speech model, and inserts the transcribed text directly into the focused text field — no copy-paste, no switching apps.
+    Press your hotkey, speak naturally, and press it again to stop recording. If you have turned on Hold activation mode in the Global Hotkey menu —  press your hotkey, speak naturally, and release. FluidVoice captures your voice, runs it through the locally downloaded speech model, and inserts the transcribed text directly into the focused text field — no copy-paste, no switching apps.
 
     - Use **Direct Dictation** for fast, inline text entry anywhere on your Mac.
-    - Switch to **Write Mode** to dictate into a dedicated overlay, or to select and rewrite existing text.
-    - Switch to **Command Mode** to control your Mac by voice — launch apps, trigger shortcuts, and run automations.
+    - Switch to **Edit Mode(alpha)  **to dictate into a dedicated overlay, or to select and rewrite existing text.
+    - Switch to **Command Mode (alpha)** to control your Mac by voice — launch apps, trigger shortcuts, and run automations.
 
     The live overlay shows your words in real time as you speak, so you always know what's being captured.
   </Step>

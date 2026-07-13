@@ -15,7 +15,7 @@ FluidVoice keeps a local record of every dictation session so you can review wha
 Every dictation session produces a history entry containing:
 
 | Field | Description |
-|---|---|
+| --- | --- |
 | **Timestamp** | Date and time the dictation occurred |
 | **App name** | The app that was in focus when you dictated |
 | **Raw text** | The original transcript from the speech model, before any AI processing |
@@ -26,16 +26,13 @@ Having both the raw and processed text in the same entry makes it easy to see wh
 
 ### How to Access History
 
-Open history from either of these locations:
-
-- **Menu bar icon → History**
-- **Settings → History**
+Open History by going to **History** in the FluidVoice application.
 
 The history view shows your recent dictations in reverse chronological order. Select any entry to expand it and see the full raw and processed text side by side.
 
 ### Clearing History
 
-To remove all history entries, go to **Settings → History** and click **Clear All**. Individual entries can also be deleted from the history view.
+Individual entries can be deleted from the history view by clicking on the entry, and pressing the **Delete Entry** button.
 
 ### Local API Access
 
@@ -55,7 +52,7 @@ curl http://localhost:11111/v1/history?limit=1000
 Each response item includes the following fields:
 
 | Field | Description |
-|---|---|
+| --- | --- |
 | `id` | Unique identifier for the history entry |
 | `timestamp` | ISO 8601 date and time of the dictation |
 | `rawText` | Original transcript from the speech model |
@@ -77,10 +74,10 @@ When audio history is enabled, FluidVoice saves a local audio recording of each 
 ### Enabling Audio History
 
 <Steps>
-  <Step title="Open History settings">
-    Go to **Settings → History**.
+  <Step title="Open Settings">
+    Go to **Settings**
   </Step>
-  <Step title="Enable audio recording">
+  <Step title="Scroll down to Save audio with transcription history">
     Toggle **Save audio with transcription history** to on.
   </Step>
   <Step title="Set a storage budget">
@@ -92,8 +89,8 @@ When audio history is enabled, FluidVoice saves a local audio recording of each 
 
 To export all saved audio recordings as a single ZIP file:
 
-1. Go to **Settings → History**.
-2. Click **Export Audio as ZIP**.
+1. Go to **Settings**
+2. Click **Export Audio, and click Export ZIP button**.
 3. Choose a save location. FluidVoice packages all recordings and downloads the archive.
 
 This is useful for backing up recordings, sharing sessions for debugging, or processing audio with external tools.

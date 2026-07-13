@@ -6,16 +6,6 @@ description: "A loopback HTTP server built into FluidVoice that lets scripts, ap
 
 FluidVoice exposes a local HTTP server on your Mac that you can call from shell scripts, Raycast extensions, Automator actions, or any other tool that can make HTTP requests. The server listens exclusively on the loopback interface, so only processes running on your Mac can reach it — no authentication token is required, and no traffic ever leaves your machine.
 
-## Enabling the Local API
-
-The Local API is off by default. To turn it on:
-
-1. Open **FluidVoice Settings**.
-2. Go to **Advanced → Local API**.
-3. Toggle **Enable Local API** on.
-
-The server starts immediately and begins listening on the default port. You can optionally enter a custom port number in the same panel if 47733 conflicts with another service on your machine.
-
 ## Base URL and default port
 
 ```text
@@ -50,7 +40,7 @@ The server only accepts connections from `127.0.0.1`, `::1`, or `localhost`. Any
 ## Available endpoints
 
 | Method | Path | Description |
-|--------|------|-------------|
+| --- | --- | --- |
 | `GET` | `/v1/health` | Check that FluidVoice is running and retrieve the app version. |
 | `POST` | `/v1/transcribe` | Transcribe an audio file or raw audio bytes using the currently selected speech model. |
 | `POST` | `/v1/postprocess` | Run AI post-processing on a text string using the configured AI provider. |

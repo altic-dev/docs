@@ -13,61 +13,70 @@ FluidVoice detects the active app through macOS's accessibility API, which monit
 The same raw dictation adapts to whichever app is in focus:
 
 | App | Tone | What FluidVoice does |
-|---|---|---|
+| --- | --- | --- |
 | **Slack** | Casual | Keeps language conversational, trims formality, adds emoji where natural |
 | **Mail** | Formal | Uses complete sentences, professional sign-offs, correct salutations |
 | **GitHub Issues** | Structured | Formats content with headers, bullet points, and action items |
 | **Notes / Quick Notes** | Personal | Preserves your natural speaking voice, minimal cleanup |
 | **Terminal / Code editors** | Raw | Outputs text exactly as spoken, no punctuation added |
 
-## How to Create a Profile
+## How to Create a Custom per-app prompt
 
 <Steps>
-  <Step title="Open Prompts settings">
-    Go to **Settings → Prompts**.
+  <Step title="Open Advanced Prompts">
+    Go to **AI Enhancement → Advanced Prompts**.
   </Step>
-  <Step title="Add a new profile">
-    Click **Add Profile**. Give the profile a descriptive name, such as "Slack — Casual" or "Mail — Formal".
+  <Step title="Open App Overrides">
+    Click on **App Overrides**, then click the **Add App** button to see the list of available applications.
   </Step>
-  <Step title="Write your prompt">
-    Enter the custom instructions you want the AI to follow when this profile is active. See the example prompts below for inspiration.
+  <Step title="Choose your app">
+    Select the app you want to configure a custom prompt for.
   </Step>
-  <Step title="Set the mode">
-    Choose whether this profile applies to **Dictate mode** (standard dictation) or **Edit mode** (rewriting selected text). You can create separate profiles for each mode within the same app.
+  <Step title="Select or create a prompt">
+    Once the app is chosen, pick a prompt to associate with it:
+
+    - **Use an existing prompt** — choose one of your saved custom prompts from the list.
+    - **Create a new prompt** — configure a new one with:
+      - A custom shortcut
+      - Your preferred AI provider and model
+      - A prompt name
+      - The prompt instructions themselves
   </Step>
-  <Step title="Bind to an app">
-    Select the target app from the app picker. FluidVoice will activate this profile whenever that app is in focus.
+  <Step title="Test your prompt">
+    Use the built-in **Test mode** to verify the prompt works for your use case and refine it if needed before saving.
   </Step>
 </Steps>
 
 ## Example Prompts
 
 <CodeGroup>
-  ```text Slack — Casual
-  Make the tone casual and conversational. Fix formatting and remove filler words. 
-  Add emoji where it feels natural and appropriate. Keep it concise.
-  ```
 
-  ```text Mail — Formal
-  Make the tone professional and formal. Fix grammar, punctuation, and sentence 
-  structure. Use complete sentences with proper salutations and sign-offs.
-  ```
+```text Slack — Casual
+Make the tone casual and conversational. Fix formatting and remove filler words. 
+Add emoji where it feels natural and appropriate. Keep it concise.
+```
 
-  ```text GitHub Issues — Structured
-  Format the output as a structured GitHub issue. Use markdown with clear headers 
-  (## Issue, ## Steps to Reproduce, ## Expected Behavior, ## Resolution). 
-  Use bullet points for lists. Keep language technical and precise.
-  ```
+```text Mail — Formal
+Make the tone professional and formal. Fix grammar, punctuation, and sentence 
+structure. Use complete sentences with proper salutations and sign-offs.
+```
 
-  ```text Quick Notes — Personal
-  Preserve the speaker's natural voice and casual tone. Fix obvious errors only. 
-  Do not restructure sentences or change the register.
-  ```
+```text GitHub Issues — Structured
+Format the output as a structured GitHub issue. Use markdown with clear headers 
+(## Issue, ## Steps to Reproduce, ## Expected Behavior, ## Resolution). 
+Use bullet points for lists. Keep language technical and precise.
+```
 
-  ```text Terminal / Code editors — Raw
-  Output raw text only. Do not add punctuation, capitalization changes, or 
-  formatting. Do not modify technical terms, variable names, or commands.
-  ```
+```text Quick Notes — Personal
+Preserve the speaker's natural voice and casual tone. Fix obvious errors only. 
+Do not restructure sentences or change the register.
+```
+
+```text Terminal / Code editors — Raw
+Output raw text only. Do not add punctuation, capitalization changes, or 
+formatting. Do not modify technical terms, variable names, or commands.
+```
+
 </CodeGroup>
 
 ## Dictate Mode vs. Edit Mode Profiles

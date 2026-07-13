@@ -4,7 +4,7 @@ sidebarTitle: "Introduction"
 description: "Discover how FluidVoice and the Fluid-1 model work together to deliver private, local-first dictation and AI enhancement on macOS."
 ---
 
-FluidVoice is a free, open-source dictation app for macOS that processes your voice entirely on your Mac. There are no subscriptions, no cloud accounts, and no data leaving your machine unless you explicitly choose a cloud AI provider. With over 50,000 downloads and a growing open-source community, FluidVoice is built for developers, writers, multilingual users, and anyone who wants a fast, private alternative to cloud-based dictation tools.
+FluidVoice is a free, open-source dictation app for macOS that processes your voice entirely on your Mac. There are no subscriptions, no cloud accounts, and no data leaving your machine unless you explicitly choose a cloud AI provider. With over 70,000 downloads and a growing open-source community, FluidVoice is built for developers, writers, multilingual users, and anyone who wants a fast, private alternative to cloud-based dictation tools.
 
 ## Two layers, one local workflow
 
@@ -12,51 +12,59 @@ FluidVoice is made up of two distinct components that work together.
 
 ### FluidVoice — the app
 
-FluidVoice is the open-source macOS app (GPLv3). It handles everything visible: the global hotkey, the live transcription overlay, local speech models, typing into any app via accessibility APIs, Command Mode, Write Mode, audio history, per-app configuration, and settings. The source code is publicly available on GitHub.
+FluidVoice is the open-source macOS app (GPLv3). It handles everything visible: the global hotkey, the live transcription overlay, local speech models, typing into any app via accessibility APIs, Custom Dictionary, Command Mode, Write Mode, transcription history, per-app configuration, file/ meeting transcription, and settings. The source code is publicly available on GitHub.
 
 ### Fluid-1 — the intelligence layer
 
 Fluid-1 is the local AI model that powers **Fluid Intelligence**, an optional on-device post-processing runtime. Once enabled, it cleans up rough dictation, applies context-aware capitalization and formatting, adapts tone to the active app, and handles dates, names, and numbers — all locally, with no API keys and no data leaving your Mac. Fluid Intelligence is privately maintained so the core dictation experience can remain free for everyone.
 
 <Note>
-  FluidVoice works great on its own without Fluid Intelligence. The Fluid-1 model is an optional ~3.5 GB download you can add during or after onboarding.
+  FluidVoice works great on its own without Fluid Intelligence. The Fluid-1 model is an optional ~3.5 GB download you can add at any moment to further polish the text.
 </Note>
 
 ## Key capabilities
 
 **Dictation modes**
 
+<Info>
+  Write Mode, and Command Mode needs a cloud AI provider. Please select an AI provider in the AI Enhancements page, and add an API key.
+</Info>
+
 - **Direct Dictation** — speak into any focused text field system-wide; your words land instantly via accessibility APIs.
-- **Write Mode** — dictate new content inline or select existing text and rewrite it, all without leaving your current app.
-- **Command Mode** — control your Mac by voice: launch apps, trigger system shortcuts, and automate workflows hands-free.
+- **Write Mode(Alpha)** — dictate new content inline or select existing text and rewrite it, all without leaving your current app. 
+- **Command Mode(Alpha)** — control your Mac by voice: launch apps, trigger system shortcuts, and automate workflows hands-free.
 
 **Fluid Intelligence**
 
-The Fluid-1 model runs locally and polishes every transcription after it leaves the speech model. It handles smart formatting, adaptive tone based on the focused app (casual in Slack, formal in Mail, structured in GitHub issues), and context-aware capitalization — with zero data leaving your machine.
+The Fluid-1 model runs locally and polishes every transcription before the text appears where your cursor is. It handles smart formatting, adaptive tone based on the focused app (casual in Slack, formal in Mail, structured in GitHub issues), auto-corrections, and context-aware capitalization — with zero data leaving your machine. You can toggle Fluid Intelligence through the <u>overlay</u>, or through <u>AI Enhancements page</u>.
 
 **Multiple speech models**
 
-FluidVoice ships with support for eight model families, from the sub-250 MB Parakeet Flash to the multilingual Whisper Large. Each model has different language coverage and latency characteristics, so you can match the model to your workflow.
+FluidVoice ships with support for eight model families, from the sub-250 MB Parakeet Flash to the multilingual Whisper Large. Each model has different language coverage, latency, and accuracy characteristics, so you can match the model to your workflow. This can be toggled in the <u>Voice Engine</u> page.
 
 **AI enhancement**
 
-Beyond Fluid Intelligence, you can connect OpenAI, Groq, or a custom provider for cloud-based post-processing. API keys are stored in macOS Keychain and never logged or transmitted by the app itself.
+Beyond Fluid Intelligence, you can connect OpenAI, Groq, or a custom provider for cloud-based post-processing through the <u>AI Enhancements page</u>. API keys are stored in macOS Keychain and never logged or transmitted by the app itself. See our <u>privacy info</u> for more information.
 
 **Per-app prompts**
 
-Assign different prompt sets to different apps so your dictation tone adapts automatically when you switch context. This feature is fully optional.
+Assign different prompt sets to different apps so your dictation tone adapts automatically when you switch context. This feature can be turned on in the <u>AI Enhancements page</u>. This feature is fully optional.
 
-**Local API**
+**Custom Dictionary**
+
+FluidVoice exposes a local API so you can integrate dictation into your own tools, scripts, or workflows without any cloud dependency.
+
+**File Transcription**
 
 FluidVoice exposes a local API so you can integrate dictation into your own tools, scripts, or workflows without any cloud dependency.
 
 ## System requirements
 
 | Requirement | Details |
-|---|---|
+| --- | --- |
 | macOS version | 15.0 Sequoia or later |
 | Processor | Apple Silicon (M-series) recommended; required for most models |
-| Intel Mac support | Available via Whisper models (from version 1.5.1+) |
+| Intel Mac support | Available via Whisper models (from version 1.5.1\+) |
 | Microphone | Required for voice capture |
 | Accessibility | Required for typing into other apps |
 | Disk space (voice model) | ~1 GB |
@@ -72,12 +80,15 @@ FluidVoice exposes a local API so you can integrate dictation into your own tool
   <Card title="Installation" icon="download" href="/installation">
     Install via Homebrew or download the latest release from GitHub.
   </Card>
+
   <Card title="Quickstart" icon="rocket" href="/quickstart">
     Follow the step-by-step guide to go from install to first dictation.
   </Card>
+
   <Card title="Speech Models" icon="microphone" href="/models/overview">
     Compare all supported models and choose the right one for your language and latency needs.
   </Card>
+
   <Card title="Local API" icon="code" href="/api/overview">
     Explore the Local API for integrating FluidVoice into your own tools.
   </Card>

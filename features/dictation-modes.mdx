@@ -1,26 +1,30 @@
 ---
 title: "FluidVoice Dictation Modes Explained"
 sidebarTitle: "Dictation Modes"
-description: "Learn how Direct Dictation, Write Mode, and Command Mode work — and when to reach for each one for faster, smarter voice input on your Mac."
+description: "Learn how Direct Dictation, Edit Mode, and Command Mode work — and when to reach for each one for faster, smarter voice input on your Mac."
 ---
 
-FluidVoice gives you three distinct ways to put your voice to work. Direct Dictation gets raw speech on screen as fast as possible. Write Mode sends your dictation through an AI layer that cleans up formatting and grammar before typing it into the active app — and can also rewrite text you've already selected. Command Mode turns your voice into a macOS automation agent: speak an instruction, and FluidVoice executes it. Switch between modes in an instant using dedicated hotkeys, so you can match your input method to whatever you're working on.
+FluidVoice gives you three distinct ways to put your voice to work. Direct Dictation gets raw speech on screen as fast as possible. Edit Mode sends your dictation through an AI layer that can rewrite your selected text, or add text to your textbox based on the instruction you speak. Command Mode turns your voice into a macOS automation agent: speak an instruction, and FluidVoice executes it. Switch between modes in an instant using dedicated hotkeys, so you can match your input method to whatever you're working on. You can also find the option to switch between modes on the overlay itself.
+
+To view a clear comparison between the modes, check out the Comparison box at the bottom of the page.
 
 <Tabs>
   <Tab title="Direct Dictation">
     ## Direct Dictation
 
-    Direct Dictation is the fastest path from voice to text. FluidVoice transcribes your speech using the local model you've selected and types the result straight into whatever app is in focus — no AI post-processing, no rewriting, no delay beyond the transcription itself.
+    Direct Dictation is the fastest path from voice to text. FluidVoice transcribes your speech using the local model you've selected in Voice Engine page, and types the result straight into whichever textbox your cursor is in — no AI post-processing, no rewriting, no delay beyond the transcription itself.
 
-    Use Direct Dictation when speed matters more than polish: coding, quick notes, chat messages, terminal commands, or any situation where you want exact control over what lands on screen.
+    Use Direct Dictation when speed matters more than polish: coding, prompting, quick notes, chat messages, terminal commands, or any situation where you want exact control over what lands on screen.
 
     **Example — dictating a quick note:**
 
     You say:
+
     > "add milk eggs and bread to the shopping list"
 
     FluidVoice types:
-    ```
+
+    ```text
     add milk eggs and bread to the shopping list
     ```
 
@@ -28,66 +32,81 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
 
     ### How to activate
 
-    Press your primary dictation hotkey (set during onboarding, or in **Settings → Hotkeys**). The live preview overlay appears while you speak. Release the hotkey (or press it again, depending on your hotkey mode) to finish and type the result.
+    Press your primary dictation hotkey (set during onboarding, or in **Settings → Global Hotkey**). The live preview overlay appears while you speak. Release the hotkey (or press it again, depending on your hotkey mode) to finish and type the result.
 
     <Tip>
       Direct Dictation is the default mode when AI Enhancement is set to **Off**. Enable Fluid Intelligence or a cloud provider in **Settings → AI Enhancement** to switch to AI-assisted Write Mode automatically.
     </Tip>
   </Tab>
+  <Tab title="Edit Mode">
+    ## Edit Mode
 
-  <Tab title="Write Mode">
-    ## Write Mode
+    <Note>
+      Edit Mode requires an AI provider to be configured. At the moment, [Fluid Intelligence](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/f1a711a8-06a9-4086-9a34-679cb5f01f74) does not support Edit Mode. To set up an AI provider, go to **AI Enhancement → AI Providers.**
+    </Note>
 
-    Write Mode sends your dictation through an AI model before it reaches the active app. The AI cleans up filler words, fixes capitalization and punctuation, converts spoken numbers and dates to their correct format, and adapts the tone to the context. The result reads like polished writing rather than raw speech.
+    Edit Mode is FluidVoice's AI text-editting assistant. It lets you either write new text based on your spoken instruction or edit text you already have selected.
 
-    Write Mode also works on text you've already typed: select any text in any app, trigger the Edit hotkey, speak your instruction, and FluidVoice rewrites the selection in place.
+    <Tip>
+      The performance of Edit Mode depends on the AI provider and the model you choose. To get the best results, make sure you choose the model that fits your workflow.
+    </Tip>
 
-    **Example — dictating an email:**
+    ### What it does
 
-    You say:
-    > "hey um so i wanted to follow up on the proposal from last week uh let me know if you have any questions thanks"
+    When you trigger Edit Mode, FluidVoice checks whether you have text selected in the active app:
 
-    FluidVoice types:
-    ```
-    Hi,
+    - **If text is selected**, it captures that text as context and you speak an instruction, e.g., "make this more formal," "shorten this," "fix the grammar", or "replace X word in this sentence with Y".
+    - **If no text is selected**, you speak what you want the AI to write, e.g., "write a quick email to the team about the delay."
 
-    I wanted to follow up on the proposal from last week. Let me know if you have any questions.
-
-    Thanks
-    ```
-
-    Filler words gone, punctuation correct, structure clean.
+    The AI response appears in whichever text box your Cursor is placed in.
 
     **Example — rewriting selected text:**
 
-    Select a rough paragraph in any app, then trigger Write Mode and say:
+    Select a rough paragraph in any app, then trigger Edit Mode and say:
+
     > "make this more concise and professional"
 
-    FluidVoice rewrites the selection in place and types the result back.
+    FluidVoice rewrites the edited text in the place of the original text.
+
+    **Example — writing from scratch:**
+
+    With nothing selected, trigger Edit Mode and say:
+
+    > "write a quick email to the team about the delay"
+
+    FluidVoice writes the email in the textbox where your Cursor is.
 
     ### How to activate
 
-    - **Dictate with AI:** Press your primary dictation hotkey. Write Mode runs automatically when AI Enhancement is enabled.
-    - **Rewrite selected text:** Select text in any app, then press your Edit hotkey (default **⌥R**). Speak your rewrite instruction. FluidVoice replaces the selection with the AI-generated result.
-
-    <Note>
-      Write Mode requires an AI provider to be configured. Enable **Fluid Intelligence** for fully on-device enhancement, or add an OpenAI or Groq key in **Settings → AI Enhancement**.
-    </Note>
+    Press your Edit hotkey (default **⌥R**). Speak your instruction, then use the **Replace Original** or **Try Again** buttons in the Edit Mode window to apply or regenerate the result.
   </Tab>
-
   <Tab title="Command Mode">
     ## Command Mode
 
+    <Note>
+      Command Mode requires an AI provider to be configured. At the moment, [Fluid Intelligence](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/f1a711a8-06a9-4086-9a34-679cb5f01f74) does not support Command Mode. To set up an AI provider, go to **AI Enhancement → AI Providers.**
+    </Note>
+
     Command Mode turns your voice into a macOS automation agent. Speak a natural-language instruction and FluidVoice — powered by a language model — figures out what to do, runs the necessary system actions, verifies the result, and reports back. You can launch apps, run Shortcuts, manipulate files, create reminders, send messages, and automate workflows, all without touching the keyboard.
 
-    Command Mode runs an agentic loop: it checks prerequisites before acting, executes the command, verifies the outcome, and retries or explains if something goes wrong.
+    <Tip>
+      The reliability of Command Mode is directly tied to the model you choose. More capable models plan, execute, and recover from errors more accurately, so pick a model that matches the complexity of the tasks you want to automate.
+    </Tip>
+
+    <Tip>
+      Open the **Command Mode** page in the app to review your full command history, execution logs, error codes, instructions, and other diagnostic information for each session. This data is stored locally on your computer, and stays fully private.
+    </Tip>
+
+    Command Mode runs an agentic loop: it checks prerequisites, executes the command, verifies the outcome, and retries or explains if something goes wrong.
 
     **Example — launching an app:**
 
     You say:
+
     > "open Safari and go to github dot com"
 
     FluidVoice executes:
+
     ```bash
     open -a Safari
     osascript -e 'tell application "Safari" to open location "https://github.com"'
@@ -96,9 +115,11 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
     **Example — creating a reminder:**
 
     You say:
+
     > "add a reminder to review the pull request tomorrow at 9 AM"
 
     FluidVoice executes:
+
     ```bash
     osascript -e 'tell application "Reminders" to make new reminder with properties {name:"Review the pull request", due date:date "tomorrow 9:00 AM"}'
     ```
@@ -106,6 +127,7 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
     **Example — file operations:**
 
     You say:
+
     > "create a folder called project-alpha in my Desktop"
 
     FluidVoice checks whether the folder exists, creates it, and confirms success.
@@ -122,12 +144,14 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
 
 ## Switching Between Modes
 
+You can easily switch between different modes by selecting the mode you want on the FluidVoice overlay itself. If you want custom hotkeys to activate each mode separately, or you want a custom hotkey for a secondary dictation shortcut, the steps below walk you through the process.
+
 <Steps>
-  <Step title="Set up your hotkeys">
-    Open **Settings → Hotkeys**. Assign separate hotkeys for your primary dictation shortcut (Direct Dictation / Write Mode) and your Command Mode shortcut. You can also configure a secondary dictation shortcut that uses a different prompt profile.
+  <Step title="Set up your custom hotkeys">
+    Open **Settings → Global Hotkey**. Assign separate hotkeys for your primary dictation shortcut, Edit Mode, and your Command Mode. You can also configure a secondary dictation shortcut that uses a different [prompt profile](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/dae31b76-6683-4468-9014-35325c88d8b8).
   </Step>
   <Step title="Use the correct hotkey for the task">
-    Press your **primary dictation hotkey** to start a Direct Dictation or Write Mode session (which one runs depends on your AI Enhancement setting). Press your **Command Mode hotkey** to start a Command Mode session. Press your **Edit hotkey** (default **⌥R**) after selecting text to rewrite it.
+    Press your \*\*primary dictation hotkey **(default right ⌥) to start a Direct Dictation. Press your Command Mode hotkey (default right ⌘)** \*\* to start a Command Mode session. Press your **Edit hotkey** (default **⌥R**) after selecting text to rewrite it.
   </Step>
   <Step title="Watch the overlay">
     The live preview overlay shows which mode is active and displays your transcription in real time as you speak. Release the hotkey to finish.
@@ -136,14 +160,20 @@ FluidVoice gives you three distinct ways to put your voice to work. Direct Dicta
 
 ## Mode Comparison
 
+<Tip>
+  Edit Mode, and Command Mode require AI enhancement enabled, and an AI provider selected. Right now, Fluid Intelligence only works with Direct Dictation Mode, and not with Edit Mode, and Command Mode.
+</Tip>
+
 <CardGroup cols={3}>
   <Card title="Direct Dictation" icon="bolt" href="/features/dictation-modes">
     Raw speech-to-text. No AI, no rewriting. Maximum speed, full control over output. Best for code, chat, quick notes.
   </Card>
-  <Card title="Write Mode" icon="wand-magic-sparkles" href="/features/dictation-modes">
+
+  <Card title="Edit Mode" icon="wand-magic-sparkles" href="/features/dictation-modes">
     AI-polished dictation. Cleans filler words, fixes grammar, adapts tone. Also rewrites selected text on command.
   </Card>
-  <Card title="Command Mode" icon="terminal" href="/features/dictation-modes">
+
+  <Card title="Command Mode " icon="terminal" href="/features/dictation-modes">
     Voice-driven Mac automation. Launches apps, runs Shortcuts, manages files, creates reminders — all from natural speech.
   </Card>
 </CardGroup>

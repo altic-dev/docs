@@ -4,17 +4,17 @@ sidebarTitle: "Installation"
 description: "Install FluidVoice via Homebrew or a direct download, then complete first-launch onboarding to grant permissions and choose your speech model."
 ---
 
-FluidVoice is free and requires no account to install. You have two options: Homebrew (recommended for developers) or a direct download from GitHub Releases. Both install the same app — choose whichever fits your workflow.
+FluidVoice is free and requires no account to install. You have two options: Homebrew (recommended for developers) or a direct download from FluidVoice website.
 
 ## System requirements
 
 Before installing, confirm your Mac meets the following requirements.
 
 | Requirement | Details |
-|---|---|
+| --- | --- |
 | macOS version | 15.0 Sequoia or later |
 | Processor | Apple Silicon (M-series) recommended |
-| Intel Mac support | Whisper models only, from version 1.5.1+ |
+| Intel Mac support | Whisper models only, from version 1.5.1\+ |
 | Microphone | Required for voice capture |
 | Accessibility permissions | Required for typing into other apps |
 | Disk space — voice model | ~1 GB |
@@ -29,6 +29,7 @@ Before installing, confirm your Mac meets the following requirements.
 Choose either method below. Both install the same release.
 
 <CodeGroup>
+
 ```bash Homebrew
 brew install --cask fluidvoice
 ```
@@ -37,6 +38,7 @@ brew install --cask fluidvoice
 # Visit the releases page and download the latest .dmg
 open https://github.com/altic-dev/FluidVoice/releases/latest
 ```
+
 </CodeGroup>
 
 After the Homebrew command finishes, FluidVoice appears in your Applications folder and is ready to launch. If you used the manual download, open the `.dmg`, drag FluidVoice to Applications, then launch it from there.
@@ -51,9 +53,9 @@ When you open FluidVoice for the first time, an onboarding flow guides you throu
 
 1. **Microphone permission** — macOS will prompt you to allow microphone access. Click **Allow**. FluidVoice cannot capture your voice without this.
 2. **Accessibility permission** — FluidVoice needs accessibility access to type into other apps via the macOS Accessibility API. Open **System Settings → Privacy & Security → Accessibility** and enable FluidVoice.
-3. **Language and model selection** — choose a speech model based on your language and preferred latency. See the [Speech Models overview](/models/overview) for a full comparison.
-4. **Fluid Intelligence setup (optional)** — download the local Fluid-1 AI model (~3.5 GB) for on-device dictation enhancement. You can skip this and add it later in Settings.
-5. **Try dictation** — the onboarding flow ends with a live dictation tryout so you can confirm everything works before closing the wizard.
+3. **Language and model selection** — FluidVoice recommends an optimal speech model based on your language selected. See the [Speech Models overview](/models/overview) for a full comparison.
+4. **Fluid Intelligence setup (optional)** — download the local Fluid-1 AI model (~3.5 GB) for on-device dictation enhancement. You can skip this and add it later in Settings, or through the [FluidVoice overlay.](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/2b166cd9-8e19-41da-8730-582ec75f3769)
+5. **Try dictation** — the onboarding flow includes a live dictation tryout so you can confirm everything works before closing the wizard.
 
 <Warning>
   Both microphone access and accessibility permissions are required for core dictation functionality. If you skip the accessibility permission, FluidVoice can transcribe speech but cannot type the result into other apps.
@@ -62,12 +64,12 @@ When you open FluidVoice for the first time, an onboarding flow guides you throu
 ## Disk space
 
 | Component | Size | Required? |
-|---|---|---|
-| FluidVoice app | Small (< 50 MB) | Yes |
+| --- | --- | --- |
+| FluidVoice app | Small (\< 50 MB) | Yes |
 | Voice model (e.g. Parakeet TDT v3) | ~500 MB – ~1 GB | Yes (one model) |
 | Fluid Intelligence (Fluid-1 model) | ~3.5 GB | No — optional |
 
-You only need one voice model to get started. Apple Speech is built into macOS and requires no download at all, making it the fastest way to get up and running.
+You only need one voice model to get started. Apple Speech is built into macOS and requires no download at all, making it the fastest way to get up and running. But we do recommend Parakeet TDT v2 to achieve optimal accuracy. You can select this in the [Voice Engine settings](https://app.mintlify.com/fluidvoice/fluidvoice/editor/main/~/080f0b3a-68fd-4316-b547-2015b1df57ab).
 
 ## Intel Mac support
 
@@ -77,4 +79,4 @@ You only need one voice model to get started. Apple Speech is built into macOS a
 
 ## Updating FluidVoice
 
-FluidVoice checks for updates automatically. To update manually, go to **Settings → Automatic Updates** and click **Check for Updates**. To get early access to new features, enable **Beta Releases** in the same panel.
+FluidVoice checks for updates automatically. To update manually, go to **Settings → Automatic Updates** and click **Check for Updates**.  You can also check for updates by right-clicking the FluidVoice icon in the menu bar. To get early access to new features, enable **Beta Releases** in the Settings page.

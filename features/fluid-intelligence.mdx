@@ -4,38 +4,49 @@ sidebarTitle: "Fluid Intelligence"
 description: "Run the Fluid-1 model entirely on your Mac for smart formatting, adaptive tone, and on-device AI enhancement with no API key required."
 ---
 
-Fluid Intelligence is a local AI runtime that runs the **Fluid-1 model** directly on your Mac. When you dictate, Fluid-1 processes the raw transcript before FluidVoice types anything into the active app — cleaning up filler words, applying correct capitalization, formatting numbers and dates, and adapting the tone to the app you're working in. Everything happens on-device. No data leaves your Mac, no API key is required, and no subscription is involved. Fluid Intelligence is entirely optional: FluidVoice works great without it.
+Fluid Intelligence is a local AI runtime that runs the **Fluid-1 model** directly on your Mac. When you dictate, Fluid-1 processes the raw speech transcript on your Computer before FluidVoice types anything into the active app — cleaning up filler words, applying correct capitalization, formatting numbers and dates, and adapting the tone to the app you're working in. Everything happens on-device. No data leaves your Mac, no API key is required, and no subscription is involved. Fluid Intelligence is entirely optional: FluidVoice works great without it.
 
 <Note>
   Fluid Intelligence requires an **Apple Silicon Mac** (M1 or later). It is not available on Intel Macs. The model download is approximately **3.5 GB**.
 </Note>
 
+<Tip>
+  We recommend using Fluid Intelligence when you accuracy is a bigger priority for you than speed. Because it is an additional AI layer on top of the Voice Engine, the transcription processing may take a few seconds.
+</Tip>
+
 ## What Fluid-1 Does
 
-Fluid-1 is purpose-built for dictation post-processing. Unlike general-purpose language models, it is tuned specifically to turn raw spoken transcripts into polished, correctly formatted text. Its capabilities include:
+Fluid-1 is a small model trained on 100K\+ dictation data points, and purpose-built for dictation post-processing. Unlike general-purpose language models, it is tuned specifically to turn raw spoken transcripts into polished, correctly formatted text. Its capabilities include:
 
 <CardGroup cols={2}>
   <Card title="Smart Formatting" icon="align-left" href="/features/fluid-intelligence">
-    Adds correct punctuation, paragraph breaks, and structure. Spoken instructions like "new line" or "bullet point" are executed rather than transcribed.
+    Adds correct punctuation, paragraph breaks, and structure. Spoken instructions like "new line", "make a list", "new paragraph" are executed rather than transcribed.
   </Card>
+
   <Card title="Context-Aware Capitalization" icon="font" href="/features/fluid-intelligence">
     Capitalizes sentence starts, proper nouns, and headings correctly based on the surrounding context — not just simple rules.
   </Card>
+
   <Card title="Adaptive Tone Per App" icon="sliders" href="/features/fluid-intelligence">
     Detects the active app and adjusts tone automatically. Slack gets casual, Mail gets formal, GitHub Issues gets structured — using your per-app prompt profiles.
   </Card>
+
   <Card title="Dates, Names & Numbers" icon="calendar" href="/features/fluid-intelligence">
-    Converts spoken numbers and times to their correct written form: "five thirty" → 5:30, "twelve fifty" → $12.50, "december twenty fifth" → December 25th.
+    Converts spoken numbers and times to their correct written form: "five thirty" → 5:30, "twelve fifty dollars" → \$12.50, "december twenty fifth" → December 25th.
   </Card>
+
   <Card title="Filler Word Removal" icon="eraser" href="/features/fluid-intelligence">
     Removes "um", "uh", "like", "you know", and false starts so your dictated text reads like something you meant to write.
   </Card>
+
   <Card title="Emoji Support" icon="face-smile" href="/features/fluid-intelligence">
-    Converts spoken emoji names to the actual emoji: "thumbs up" → 👍, "heart emoji" → ❤️, "fire emoji" → 🔥.
+    Converts spoken emoji names to the actual emoji: "thumbs up emoji" → 👍, "heart emoji" → ❤️, "fire emoji" → 🔥.
   </Card>
+
   <Card title="Hyphens & Compound Words" icon="minus" href="/features/fluid-intelligence">
     Correctly formats hyphenated words, compound terms, and technical phrases that speech models often run together.
   </Card>
+
   <Card title="Self-Correction Handling" icon="rotate-left" href="/features/fluid-intelligence">
     Detects spoken corrections ("no wait", "scratch that", "actually") and discards the text before them, keeping only what you meant to say.
   </Card>
@@ -45,8 +56,8 @@ Fluid-1 is purpose-built for dictation post-processing. Unlike general-purpose l
 
 FluidVoice supports several AI enhancement providers, including OpenAI and Groq. Fluid Intelligence is different in every meaningful way:
 
-| | Fluid Intelligence | Cloud Providers (OpenAI, Groq) |
-|---|---|---|
+|  | Fluid Intelligence | Cloud Providers (OpenAI, Groq) |
+| --- | --- | --- |
 | **Runs on** | Your Mac, locally | Remote servers |
 | **Data leaves your Mac** | Never | Yes (transcripts sent to provider) |
 | **API key required** | No | Yes |
@@ -63,7 +74,7 @@ FluidVoice supports several AI enhancement providers, including OpenAI and Groq.
 
 <Steps>
   <Step title="Open AI Enhancement settings">
-    Go to **Settings → AI Enhancement**.
+    Go to **AI Enhancement → AI Providers**
   </Step>
   <Step title="Select Fluid Intelligence">
     Choose **Fluid Intelligence** from the provider list. If the model is not yet downloaded, FluidVoice prompts you to download it.
@@ -78,6 +89,13 @@ FluidVoice supports several AI enhancement providers, including OpenAI and Groq.
 
 You can also enable Fluid Intelligence during the initial onboarding flow. When FluidVoice asks about AI Enhancement setup, select **Fluid Intelligence** and follow the same download prompt.
 
+## Other Ways to Use Fluid Intelligence
+
+Once the model is installed, you can switch Fluid Intelligence on or off without opening Settings.
+
+- **Toggle from the dictation overlay.** During any dictation session, use the Fluid Intelligence toggle in the overlay to enable or disable it on the fly.
+- **Assign a dedicated hotkey.** To keep a separate shortcut that always dictates with Fluid Intelligence, go to **Settings → Global Hotkey → Primary Dictation Shortcuts → Add Shortcut**, then enable **AI Prompt** for that shortcut and set the provider to **Fluid Intelligence**. Triggering this hotkey will dictate with Fluid Intelligence enabled, regardless of your default provider.
+
 ## Demo Scenarios
 
 These are real examples of what Fluid-1 handles in everyday dictation:
@@ -85,10 +103,12 @@ These are real examples of what Fluid-1 handles in everyday dictation:
 **Email formatting**
 
 Raw transcript:
+
 > "hey um so i wanted to reach out about the meeting on thursday uh can we move it to friday at two pm thanks"
 
 Fluid-1 output:
-```
+
+```text wrap
 Hi,
 
 I wanted to reach out about the meeting on Thursday — can we move it to Friday at 2 PM?
@@ -99,31 +119,66 @@ Thanks
 **Casual tone with emoji**
 
 Raw transcript:
+
 > "just shipped the fix lgtm thumbs up fire emoji"
 
 Fluid-1 output:
-```
+
+```text wrap
 Just shipped the fix. LGTM 👍🔥
 ```
 
 **Hyphens and numbers**
 
 Raw transcript:
+
 > "the api key is twenty four characters and expires in thirty days"
 
 Fluid-1 output:
-```
+
+```text wrap
 The API key is 24 characters and expires in 30 days.
 ```
 
 **Self-correction**
 
 Raw transcript:
+
 > "send the invoice to john no wait send it to sarah"
 
 Fluid-1 output:
-```
+
+```text wrap
 Send the invoice to Sarah.
+```
+
+**Spoken formatting instructions**
+
+Raw transcript:
+
+> "meeting notes new line action items new paragraph follow up with design team on the new mockups"
+
+Fluid-1 output:
+
+```text wrap
+Meeting notes
+Action items
+
+Follow up with the design team on the new mockups.
+```
+
+**List generation**
+
+Raw transcript:
+
+> "make a grocery list eggs banana"
+
+Fluid-1 output:
+
+```text wrap
+Grocery list:
+- Eggs
+- Banana
 ```
 
 ## Fluid Intelligence as a Private Model

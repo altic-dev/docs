@@ -4,74 +4,97 @@ sidebarTitle: "Privacy"
 description: "Your voice, audio, and transcribed text stay on your Mac. Understand exactly what FluidVoice stores locally, what analytics collect, and what it doesn't."
 ---
 
-FluidVoice is built around a local-first principle: your voice recordings, transcribed text, and AI activity never leave your Mac unless you explicitly choose a cloud provider. This page explains precisely what stays on your device, what optional analytics collect, and how cloud AI providers fit in when you choose to use them.
+_Last updated: July 5, 2026_
 
-## What Stays on Your Mac
+FluidVoice is a local-first macOS dictation app. We designed FluidVoice so your voice, audio, transcripts, selected text, prompts, and AI responses stay on your Mac unless you choose to use an external AI provider or another optional external service.
 
-All of the following are processed and stored exclusively on your device:
+## Information We Do Not Collect
 
-- **Voice recordings and raw audio** — captured locally and never transmitted anywhere
-- **Transcribed text** — the output of your speech recognition model, processed on-device
-- **AI prompts and responses** — when using Fluid Intelligence, all prompt and response activity runs locally with no network calls
-- **Custom dictionary entries and prompt profiles** — your personal vocabulary boosts and dictation prompt customizations
-- **Transcription history** — your optional local recording history, stored on your Mac and exportable as a ZIP file
+FluidVoice does not collect or send the following to FluidVoice-operated servers:
 
-None of this data is sent to ALTIC or any third party.
+- Raw microphone audio
+- Transcription text
+- Selected text
+- Rewrite prompts or AI responses
+- Terminal commands or command outputs
+- Window titles, app names, file names, file paths, clipboard contents, or text you type
+- Account information, because FluidVoice does not require a FluidVoice account
 
-## Optional Analytics
+We do not use transcripts, audio, selected text, prompts, or AI responses to train AI models.
 
-FluidVoice includes opt-in anonymous analytics to help understand app health and feature usage. Analytics are enabled by default, but you can disable them at any time.
+## Fluid-1 and Local AI Processing
 
-### What analytics collect
+FluidVoice may include **Fluid-1**, also called **Fluid Intelligence**, a local post-processing model for dictation enhancement. When Fluid-1 is used, FluidVoice sends the transcript and limited context to the local Fluid Intelligence runtime on your Mac so the model can clean up formatting, punctuation, self-corrections, and transcription errors.
 
-Analytics are designed to be minimal and non-identifying:
+Fluid-1 inference runs locally. Transcript text processed by Fluid-1 is not sent to FluidVoice servers for model processing.
 
-- App version, build number, and macOS version
-- Low-cardinality feature and configuration flags (for example: which app mode is active, which major settings are enabled)
-- Approximate usage ranges — not exact values
-- High-level success and error outcomes
+The Fluid-1 model file may be downloaded from a model hosting service, such as Hugging Face, and stored locally on your Mac. Model downloads are for retrieving model weights, not for processing your transcripts.
 
-### What analytics never collect
+FluidVoice may keep local in-memory runtime state, such as model sessions or prompt-prefix cache data, to improve performance. This is used for local inference performance and is not analytics data.
 
-<CardGroup cols={2}>
-  <Card title="Your content" icon="microphone-slash" href="/privacy#what-analytics-never-collect">
-    Voice recordings, raw audio, transcribed text, selected text, prompts, or AI responses are never collected.
-  </Card>
-  <Card title="Your activity" icon="eye-slash" href="/privacy#what-analytics-never-collect">
-    Terminal commands, window titles, file paths, clipboard contents, and typed text are never collected.
-  </Card>
-  <Card title="Personal information" icon="user-slash" href="/privacy#what-analytics-never-collect">
-    No names, email addresses, or any other personally identifying information is ever collected.
-  </Card>
-  <Card title="App context" icon="window-minimize" href="/privacy#what-analytics-never-collect">
-    What apps you use, what you're working on, or any other context from your screen or environment is never collected.
-  </Card>
-</CardGroup>
+## Anonymous or Pseudonymous Analytics
 
-### How to disable analytics
+FluidVoice may collect anonymous or pseudonymous analytics to understand app health, reliability, performance, and feature usage. Analytics can be disabled at any time in **Settings → Share Anonymous Analytics**.
 
-Go to **Settings → Share Anonymous Analytics** and toggle it off. Analytics stop immediately and no further data is sent.
+Analytics may include:
 
-## Cloud AI Providers
+- App version, build number, macOS version, CPU architecture, chip family, and hardware model
+- A random anonymous install identifier
+- Coarse feature/configuration flags, such as whether streaming preview, AI processing, or Fluid-1 local processing is enabled
+- Usage buckets, such as word-count ranges rather than exact transcript text
+- Latency metrics, including transcription, post-processing, and local model runtime timing
+- High-level success, failure, and error categories
+- Provider/model metadata when relevant to performance or reliability
 
-FluidVoice's core dictation is entirely local. However, if you choose to enhance your transcriptions using a cloud AI provider, your transcribed text is sent to that provider's API.
+Analytics do not include transcript content, raw audio, selected text, prompts, AI responses, clipboard contents, file paths, or terminal output.
 
-Supported providers:
+## Local Data Stored on Your Mac
 
-- **OpenAI**
-- **Groq**
-- **Custom providers** — any OpenAI-compatible endpoint you configure
+FluidVoice stores app preferences locally on your Mac so the app can remember your settings. API keys for optional providers are stored in **macOS Keychain**.
 
-When you use a cloud provider, your transcription text leaves your Mac to reach that provider's servers. Review each provider's own privacy policy to understand how they handle your data.
+FluidVoice may also store local transcription history if **Save Transcription History** is enabled. This history can include raw and processed transcription text, timestamps, app/window context used for display, and related metadata. Audio history is separate and is disabled by default; if enabled, microphone audio is stored locally on your Mac with your history.
 
-**API keys** for cloud providers are stored securely in the macOS Keychain. When macOS prompts you for key access, select **Always Allow** to avoid repeated prompts.
+Local model files, including Fluid-1 if installed, may be stored in Application Support on your Mac.
 
-### Fluid Intelligence stays local
+Because FluidVoice does not store your transcripts or audio on FluidVoice servers, requests to access or delete that content should be handled locally in the app or on your Mac.
 
-If you use **Fluid Intelligence** (the Fluid-1 model), all AI enhancement—smart formatting, context-aware capitalization, adaptive tone, and post-processing—runs entirely on your Mac. No data leaves your device, no API key is needed, and no cloud provider is involved.
+You can disable transcription history and audio history in settings, and you can clear saved history from the app.
 
-## License
+## Optional External Providers
 
-FluidVoice is open source. From **2026-02-23** onward, it is licensed under the [GNU General Public License v3.0 (GPLv3)](https://github.com/altic-dev/FluidVoice/blob/main/LICENSE). Versions published before that date were licensed under Apache License 2.0.
+If you choose to enable a cloud AI provider, custom provider, or compatible local server, FluidVoice sends the text needed for that feature to the provider you configured. This may include transcribed text, selected text, prompts, or rewrite instructions, depending on the feature you use.
 
-You can read, audit, modify, and contribute to the source code on [GitHub](https://github.com/altic-dev/FluidVoice).
+Those providers process data under their own privacy policies. FluidVoice does not control their data practices.
+
+FluidVoice may also connect to external services to download speech or language models, check for updates, or submit anonymous or pseudonymous analytics.
+
+## How We Use Information
+
+We use anonymous or pseudonymous analytics only to:
+
+- Measure app reliability and performance
+- Understand which features are used
+- Diagnose high-level error patterns
+- Improve transcription latency, local model performance, and product quality
+
+We do not sell personal information. We do not use FluidVoice analytics to track you across other apps or websites.
+
+## Your Choices
+
+You can:
+
+- Disable anonymous or pseudonymous analytics in settings
+- Use local/on-device processing, including Fluid-1 where available
+- Avoid cloud AI providers
+- Disable transcription history
+- Disable audio history
+- Delete saved transcription history and audio history
+- Remove provider API keys from settings or macOS Keychain
+
+## Contact
+
+For privacy questions, contact: [alticdev@gmail.com](mailto:alticdev@gmail.com)
+
+You can also open an issue at: [github.com/altic-dev/FluidVoice](https://github.com/altic-dev/FluidVoice)
+
+© 2026 FluidVoice.

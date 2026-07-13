@@ -21,11 +21,11 @@ Both slots are configured independently and can use entirely different key combi
   <Step title="Open Settings">
     Click the FluidVoice icon in your menu bar, then select **Settings**.
   </Step>
-  <Step title="Go to the Hotkeys section">
-    Select **Hotkeys** in the Settings sidebar.
+  <Step title="Go to the Global Hotkey section">
+    Go to **Shortcuts**.
   </Step>
-  <Step title="Click the hotkey field">
-    Click the field next to **Primary Dictation Shortcut** (or **Secondary Dictation Shortcut**) to focus it.
+  <Step title="Add a new Shortcut, or change current shortcut">
+    Click the Change button to change your Hotkey shortcut, or select the Add shortcut button to add an additional Primary Dictation Shortcut
   </Step>
   <Step title="Press your desired key combination">
     Press the key or key combination you want to use. FluidVoice records it immediately. The field updates to show the captured shortcut.
@@ -44,9 +44,11 @@ FluidVoice supports three activation modes. Choose the one that fits how you dic
   <Card title="Hold to Record" icon="hand" href="/configuration/hotkeys#hotkey-activation-modes">
     **Hold to record, release to stop.** Recording runs only while you keep the key pressed. Ideal for short, focused bursts.
   </Card>
+
   <Card title="Toggle" icon="toggle-on" href="/configuration/hotkeys#hotkey-activation-modes">
     **Tap once to start, tap again to stop.** Great for longer dictations where you don't want to hold a key down.
   </Card>
+
   <Card title="Automatic (Both)" icon="wand-magic-sparkles" href="/configuration/hotkeys#hotkey-activation-modes">
     **Tap to toggle, hold for push-to-talk.** FluidVoice detects your intent and switches modes accordingly.
   </Card>
@@ -66,9 +68,3 @@ Global hotkeys intercept key combinations system-wide, so it's important to pick
 - **Use the secondary slot** for a less-used combination rather than fighting for a prime key combo.
 
 If FluidVoice detects that your primary and secondary shortcuts conflict with each other, it displays a warning in Settings.
-
-## Assigning a Profile to the Secondary Hotkey
-
-The secondary hotkey can be configured to activate a specific dictation profile—for example, a prompt tuned for formal writing or a particular language.
-
-To assign a profile to the secondary slot, go to **Settings → Hotkeys**, set a key combination for **Secondary Dictation Shortcut**, then choose the profile from the prompt selector below it. When you press the secondary hotkey, FluidVoice uses that profile instead of your primary selection.

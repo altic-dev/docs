@@ -4,53 +4,105 @@ sidebarTitle: "Custom Dictionary"
 description: "Fix misheard words and expand abbreviations with text replacements, and boost recognition of technical terms and proper nouns with custom vocabulary."
 ---
 
-The Custom Dictionary gives you two tools to improve how FluidVoice handles your specific vocabulary. **Text Replacements** let you define trigger phrases that automatically swap out for a different string after transcription — useful for expanding abbreviations, correcting brand names, or inserting boilerplate text. **Vocabulary Boost** tells the speech model to listen harder for specific words and phrases that might otherwise be misheard, which is especially helpful for technical terms, product names, and uncommon proper nouns.
+FluidVoice's Custom Dictionary lets you teach the app your vocabulary, fix recurring transcription mistakes, and automatically clean up output. You can add words, define instant replacements, train the model by voice, and back everything up with JSON import/export.
 
 <Note>
-  Changes to both text replacements and custom words take effect immediately — no app restart required.
+  Changes to your dictionary take effect immediately — no app restart required.
 </Note>
 
----
+## Open the Custom Dictionary
 
-## Text Replacements
+- **From the menu bar:** Click the FluidVoice icon → **Custom Dictionary**.
+- **From the app:** Open **FluidVoice Settings → Custom Dictionary**.
 
-Text Replacements work as a post-transcription find-and-replace. After the speech model (and optionally the AI enhancement layer) produces a transcript, FluidVoice scans the output for any of your defined trigger strings and substitutes the configured replacement before typing the text into the active app.
+## Your Dictionary
 
-### Use Cases
+Your Dictionary is your personal word list. Use it for names, jargon, technical terms, or anything FluidVoice should recognize but might not transcribe correctly out of the box.
 
-- **Expand abbreviations:** Say "addr" and get your full mailing address typed out
-- **Fix proper nouns:** Ensure "FluidVoice" is always capitalized correctly even if the model transcribes it as "fluid voice"
-- **Insert boilerplate:** Say "sig" to insert your email signature
-- **Correct brand names:** Map common mishearings of product names to the correct spelling
+- Add a word or phrase you use often.
+- FluidVoice will prefer these entries during transcription.
 
-### How to Manage Replacements
+**Example entries:**
 
-<Steps>
-  <Step title="Open Custom Dictionary">
-    Go to **Settings → Custom Dictionary → Replacements**.
-  </Step>
-  <Step title="Add a replacement">
-    Click **Add**. Enter one or more **trigger strings** — the words or phrases that will be matched in the transcript. Then enter the **replacement string** — what those triggers will be replaced with.
-  </Step>
-  <Step title="Save">
-    Click **Save**. The replacement is active immediately for your next dictation session.
-  </Step>
-</Steps>
+| Word | Notes |
+| --- | --- |
+| `kubectl` | Technical CLI tool |
+| `GraphQL` | Product / technology name |
+| `Kubernetes` | Domain term |
+| `Xcode` | Apple product name |
 
-Each replacement entry can have multiple trigger strings mapped to a single replacement. This lets you catch different mishearings of the same word in one rule.
+<Note>
+  Vocabulary boosting applies to **Parakeet models** (Parakeet Flash, Parakeet TDT v3, Parakeet TDT v2). Other speech models handle custom words differently or may not support vocabulary injection. If you're using Whisper or Apple Speech, Instant Replacements are the more reliable tool for correcting specific words.
+</Note>
+
+## Instant Replacements
+
+Instant Replacements correct text on the fly. When FluidVoice hears a trigger phrase, it immediately replaces it with whatever you define.
+
+- **Trigger:** what the speech model hears (e.g. `fluid voice`, `altic`).
+- **Replacement:** what should appear in the transcript instead.
+
+Replacements are applied live while you dictate.
 
 **Example entries:**
 
 | Triggers | Replacement |
-|---|---|
+| --- | --- |
 | `addr`, `my address` | `123 Main Street, Springfield, IL 62701` |
 | `fluid voice`, `fluidvoice` | `FluidVoice` |
 | `open ai`, `openai` | `OpenAI` |
-| `sig` | `Best regards,\nYour Name\nyour@email.com` |
+| `sig` | Your email signature |
 
-### API Access
+### Train a Replacement by Voice
 
-Power users can manage replacements programmatically via FluidVoice's local REST API:
+If a word is consistently misheard, use **Train by Voice** to fix it:
+
+<Steps>
+  <Step title="Open Train Replacement">
+    Go to **Custom Dictionary → Train Replacement**.
+  </Step>
+  <Step title="Enter the target word">
+    Enter the word or phrase you actually wanted.
+  </Step>
+  <Step title="Record">
+    Record the way you naturally say it.
+  </Step>
+  <Step title="Review">
+    Review the captured ASR variants.
+  </Step>
+  <Step title="Save or merge">
+    Save or merge the entry into your Instant Replacements.
+  </Step>
+</Steps>
+
+Newly trained replacements are placed at the top of your list so they're easy to find.
+
+### Empty Replacements
+
+You can map a trigger to an **empty replacement** to delete unwanted text from the output. For example, map `¿` to nothing to prevent Spanish inverted question marks from appearing in your transcript.
+
+A replacement only needs at least one trigger to be valid; the replacement field can be left empty.
+
+## Import and Export
+
+Your entire Custom Dictionary — both Instant Replacements and Custom Words — can be moved between devices or shared with teammates.
+
+- **Export:** produces a simple JSON file containing all replacement rules and custom words.
+- **Import:** choose whether to **merge** with your current dictionary or **replace** it entirely.
+
+Import/Export controls are in the header of the Custom Dictionary view.
+
+<Note>
+  The exact JSON schema may vary by app version. Use the in-app export to get the current format.
+</Note>
+
+## Automatic Dictionary Learning
+
+FluidVoice can learn from your corrections. When you fix a transcription error, the app can suggest or automatically add the corrected word or phrase to your dictionary over time, improving accuracy without manual training.
+
+## API Access
+
+Power users can manage the dictionary programmatically via FluidVoice's local REST API:
 
 ```bash
 # List all replacements
@@ -61,70 +113,18 @@ curl -X POST http://localhost:11111/v1/dictionary/replacements \
   -H "Content-Type: application/json" \
   -d '{"triggers": ["addr"], "replacement": "123 Main Street"}'
 
-# Replace all entries at once
-curl -X POST http://localhost:11111/v1/dictionary/replacements \
-  -H "Content-Type: application/json" \
-  -d '{"mode": "replace", "entries": [{"triggers": ["addr"], "replacement": "123 Main Street"}]}'
-```
-
----
-
-## Vocabulary Boost (Custom Words)
-
-Vocabulary Boost registers specific words and phrases with the speech model so it assigns them higher recognition probability during transcription. When the model hears audio that could plausibly match a boosted term, it favors that interpretation over similar-sounding alternatives.
-
-This is different from text replacements: Vocabulary Boost operates at the **speech recognition** level, before transcription is complete, rather than as a string substitution afterwards.
-
-### Use Cases
-
-- **Technical terms:** `kubectl`, `GraphQL`, `OAuth`, `YAML` — words that sound unusual and get transcribed inconsistently
-- **Product names:** Your company's product, internal codenames, or brand names with unusual pronunciation
-- **Proper nouns:** Names of people, places, or projects that the model is likely to mishear
-- **Domain-specific vocabulary:** Medical, legal, or scientific terms that don't appear in the model's standard training data
-
-### How to Manage Custom Words
-
-<Steps>
-  <Step title="Open Custom Dictionary">
-    Go to **Settings → Custom Dictionary → Custom Words**.
-  </Step>
-  <Step title="Add a word">
-    Click **Add**. Enter the **word or phrase** exactly as you want it to be recognized and transcribed.
-  </Step>
-  <Step title="Set an optional weight">
-    The **weight** field controls how strongly the model favors this term. Higher values increase recognition priority. Leave it blank to use the default boost level.
-  </Step>
-  <Step title="Add aliases (optional)">
-    If the word has common alternate spellings or pronunciations, add them as **aliases**. The model uses aliases to widen its recognition surface for the term.
-  </Step>
-</Steps>
-
-**Example entries:**
-
-| Word | Weight | Aliases |
-|---|---|---|
-| `kubectl` | 1.5 | `kube control`, `cube cuttle` |
-| `GraphQL` | 1.2 | `graph QL`, `graphql` |
-| `Kubernetes` | 1.3 | `cube netties`, `koo-burr-net-eez` |
-| `Xcode` | 1.0 | `x code`, `ex code` |
-
-### API Access
-
-```bash
 # List all custom words
 curl http://localhost:11111/v1/dictionary/custom-words
 
-# Add a single word
+# Add a custom word
 curl -X POST http://localhost:11111/v1/dictionary/custom-words \
   -H "Content-Type: application/json" \
-  -d '{"text": "kubectl", "weight": 1.5, "aliases": ["kube control"]}'
-
-# Replace all custom words at once
-curl -X POST http://localhost:11111/v1/dictionary/custom-words \
-  -H "Content-Type: application/json" \
-  -d '{"mode": "replace", "entries": [{"text": "kubectl", "weight": 1.5}]}'
+  -d '{"text": "kubectl"}'
 ```
 
-<Note>
-  Vocabulary Boost applies to **Parakeet models** (Parakeet Flash, Parakeet TDT v3, Parakeet TDT v2). Other speech models handle custom words differently or may not support vocabulary injection. If you're using Whisper or Apple Speech, text replacements are the more reliable tool for correcting specific words.
-</Note>
+## Tips
+
+- **Keep triggers short and specific.** A single misheard word usually makes a better trigger than a long phrase.
+- **Order matters.** More specific replacements are typically checked first.
+- **Back up before replacing.** Use Export before large import/replace operations.
+- **Empty replacements** are useful for removing repeated filler words, punctuation, or artifacts from bilingual dictation.
